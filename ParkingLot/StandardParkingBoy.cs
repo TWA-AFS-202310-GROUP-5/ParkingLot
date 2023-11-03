@@ -4,21 +4,23 @@ using System.Linq;
 
 namespace ParkingLot
 {
-    public class ParkingBoy
+    public class StandardParkingBoy
     {
         private Dictionary<Guid, ParkingLot> parkingLots = new Dictionary<Guid, ParkingLot>();
 
-        public ParkingBoy(ParkingLot parkingLot)
+        public StandardParkingBoy(ParkingLot parkingLot)
         {
             parkingLots.Add(parkingLot.Id, parkingLot);
         }
 
-        public ParkingBoy(ParkingLot[] parkingLots)
+        public StandardParkingBoy(ParkingLot[] parkingLots)
         {
             parkingLots.ToList().ForEach(parkingLot => this.parkingLots.Add(parkingLot.Id, parkingLot));
         }
 
-        public Ticket Park(Car car)
+        protected Dictionary<Guid, ParkingLot> ParkingLots => parkingLots;
+
+        public virtual Ticket Park(Car car)
         {
             try
             {
@@ -34,7 +36,7 @@ namespace ParkingLot
             }
         }
 
-        public Car Fetch(Ticket ticket)
+        public virtual Car Fetch(Ticket ticket)
         {
             try
             {
