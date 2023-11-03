@@ -8,7 +8,7 @@
     public class Story2Test
     {
         [Fact] //Case1
-        public void Should_return_nothing_with_erroe_msg_when_fetch_car_given_unrecognized_ticket()
+        public void Should_return_nothing_with_error_msg_when_fetch_car_given_unrecognized_ticket()
         {
             ParkingLot parkingLot = new ParkingLot();
 
@@ -19,7 +19,7 @@
         }
 
         [Fact] //Case2
-        public void Should_return_nothing_with_erroe_msg_when_fetch_car_given_used_ticket()
+        public void Should_return_nothing_with_error_msg_when_fetch_car_given_used_ticket()
         {
             ParkingLot parkingLot = new ParkingLot();
             string car = "Car";
@@ -32,7 +32,7 @@
         }
 
         [Fact] //Case3
-        public void Should_return_nothing_with_erroe_msg_when_park_car_with_no_position()
+        public void Should_return_nothing_with_error_msg_when_park_car_with_no_position()
         {
             ParkingLot parkingLot = new ParkingLot();
             int numOfCars = 10;
