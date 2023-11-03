@@ -1,23 +1,44 @@
 ﻿namespace ParkingLot
 {
     using System;
+    using System.Collections.Generic;
+    using System.Data;
+
     public class ParkingLot
     {
         private int capacity;
+        private Dictionary<Ticket, Car> ticketCarMap;
 
         public ParkingLot(int capacity)
         {
             this.capacity = capacity;
+            ticketCarMap = new Dictionary<Ticket, Car>();
         }
 
-        public Car fetch(Ticket ticket)
+        public int EmptyLotNum => capacity - ticketCarMap.Count;
+
+        public Car Fetch(Ticket ticket)
         {
-            throw new NotImplementedException();
+            Car car = ticketCarMap.GetValueOrDefault(ticket, null);
+            if (car is not null)
+            {
+                ticketCarMap.Remove(ticket);
+            }
+
+            return car;
         }
 
-        public Ticket park(Car car)
+        public Ticket Park(Car car)
         {
-            throw new NotImplementedException();
+            if (EmptyLotNum == 0)
+            {
+                return null;
+            }
+
+            Ticket ticket = new Ticket();
+            ticketCarMap[ticket] = car;
+
+            return ticket;
         }
     }
 }

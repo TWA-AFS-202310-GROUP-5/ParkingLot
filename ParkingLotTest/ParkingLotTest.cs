@@ -15,7 +15,7 @@ namespace ParkingLotTest
             Car car = new Car();
 
             //When
-            var ticket = parkinglot.park(car);
+            var ticket = parkinglot.Park(car);
 
             //Then
             Assert.IsType<Ticket>(ticket);
@@ -28,10 +28,10 @@ namespace ParkingLotTest
             int capacity = 10;
             ParkingLot parkinglot = new ParkingLot(capacity);
             Car car = new Car();
-            var ticket = parkinglot.park(car);
+            var ticket = parkinglot.Park(car);
 
             //When
-            var result = parkinglot.fetch(ticket);
+            var result = parkinglot.Fetch(ticket);
 
             //Then
             Assert.True(car == result);
@@ -45,12 +45,12 @@ namespace ParkingLotTest
             ParkingLot parkinglot = new ParkingLot(capacity);
             Car car1 = new Car();
             Car car2 = new Car();
-            var ticket1 = parkinglot.park(car1);
-            var ticket2 = parkinglot.park(car2);
+            var ticket1 = parkinglot.Park(car1);
+            var ticket2 = parkinglot.Park(car2);
 
             //When
-            var result1 = parkinglot.fetch(ticket1);
-            var result2 = parkinglot.fetch(ticket1);
+            var result1 = parkinglot.Fetch(ticket1);
+            var result2 = parkinglot.Fetch(ticket2);
 
             //Then
             Assert.True(car1 == result1);
@@ -64,11 +64,11 @@ namespace ParkingLotTest
             int capacity = 10;
             ParkingLot parkinglot = new ParkingLot(capacity);
             Car car = new Car();
-            var ticket = parkinglot.park(car);
+            var ticket = parkinglot.Park(car);
             var invalidTicket = new Ticket();
 
             //When
-            var result = parkinglot.fetch(invalidTicket);
+            var result = parkinglot.Fetch(invalidTicket);
 
             //Then
             Assert.Null(result);
@@ -81,11 +81,11 @@ namespace ParkingLotTest
             int capacity = 10;
             ParkingLot parkinglot = new ParkingLot(capacity);
             Car car = new Car();
-            var ticket = parkinglot.park(car);
-            parkinglot.fetch(ticket);
+            var ticket = parkinglot.Park(car);
+            parkinglot.Fetch(ticket);
 
             //When
-            var result = parkinglot.fetch(ticket);
+            var result = parkinglot.Fetch(ticket);
 
             //Then
             Assert.Null(result);
@@ -99,10 +99,10 @@ namespace ParkingLotTest
             ParkingLot parkinglot = new ParkingLot(capacity);
             Car car1 = new Car();
             Car car2 = new Car();
-            parkinglot.park(car1);
+            parkinglot.Park(car1);
 
             //When
-            var result = parkinglot.park(car2);
+            var result = parkinglot.Park(car2);
 
             //Then
             Assert.Null(result);
