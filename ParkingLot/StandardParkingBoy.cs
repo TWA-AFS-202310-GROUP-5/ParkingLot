@@ -33,7 +33,7 @@ namespace ParkingLotManagement
 
         public Ticket Park(string carName)
         {
-            var firstAvailableParkingLot = GetFirstAvailableParkingLot();
+            var firstAvailableParkingLot = this.GetFirstAvailableParkingLot();
             if (firstAvailableParkingLot == null)
             {
                 throw new WrongTicketExceptoion("No available position.");
