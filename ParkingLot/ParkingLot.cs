@@ -20,10 +20,12 @@
         public Car Fetch(Ticket ticket)
         {
             Car car = ticketCarMap.GetValueOrDefault(ticket, null);
-            if (car is not null)
+            if (car is null)
             {
-                ticketCarMap.Remove(ticket);
+                throw new InvalidOperationException("Unrecognized parking ticket.");
             }
+
+            ticketCarMap.Remove(ticket);
 
             return car;
         }
@@ -32,10 +34,11 @@
         {
             if (EmptyLotNum == 0)
             {
-                return null;
+                throw new InvalidOperationException("No available position.");
             }
 
             Ticket ticket = new Ticket();
+
             ticketCarMap[ticket] = car;
 
             return ticket;

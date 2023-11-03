@@ -1,7 +1,10 @@
 namespace ParkingLotTest
 {
+    using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
     using ParkingLot;
+    using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Security.Authentication;
     using Xunit;
 
     public class ParkingLotTest
@@ -58,54 +61,57 @@ namespace ParkingLotTest
         }
 
         [Fact]
-        public void Should_return_nothing_when_fetch_the_car_given_a_parking_lot_and_a_wrong_parking_ticket()
+        public void Should_return_nothing_with_error_message_when_fetch_the_car_given_a_parking_lot_and_a_wrong_parking_ticket()
         {
             //Given
             int capacity = 10;
+            string expectedErrorMessage = "Unrecognized parking ticket.";
             ParkingLot parkinglot = new ParkingLot(capacity);
             Car car = new Car();
             var ticket = parkinglot.Park(car);
             var invalidTicket = new Ticket();
 
             //When
-            var result = parkinglot.Fetch(invalidTicket);
+            var exception = Assert.Throws<InvalidOperationException>(() => parkinglot.Fetch(invalidTicket));
 
             //Then
-            Assert.Null(result);
+            Assert.Equal(expectedErrorMessage, exception.Message);
         }
 
         [Fact]
-        public void Should_return_nothing_when_fetch_the_car_given_a_parking_lot_and_a_used_parking_ticket()
+        public void Should_return_nothing_with_error_message_when_fetch_the_car_given_a_parking_lot_and_a_used_parking_ticket()
         {
             //Given
             int capacity = 10;
+            string expectedErrorMessage = "Unrecognized parking ticket.";
             ParkingLot parkinglot = new ParkingLot(capacity);
             Car car = new Car();
             var ticket = parkinglot.Park(car);
             parkinglot.Fetch(ticket);
 
             //When
-            var result = parkinglot.Fetch(ticket);
+            var exception = Assert.Throws<InvalidOperationException>(() => parkinglot.Fetch(ticket));
 
             //Then
-            Assert.Null(result);
+            Assert.Equal(expectedErrorMessage, exception.Message);
         }
 
         [Fact]
-        public void Should_return_nothing_when_park_the_car_given_a_parking_without_any_position()
+        public void Should_return_nothing_with_error_message_when_park_the_car_given_a_parking_without_any_position()
         {
             //Given
             int capacity = 1;
+            string expectedErrorMessage = "No available position.";
             ParkingLot parkinglot = new ParkingLot(capacity);
             Car car1 = new Car();
             Car car2 = new Car();
             parkinglot.Park(car1);
 
             //When
-            var result = parkinglot.Park(car2);
+            var exception = Assert.Throws<InvalidOperationException>(() => parkinglot.Park(car2));
 
             //Then
-            Assert.Null(result);
+            Assert.Equal(expectedErrorMessage, exception.Message);
         }
     }
 }
