@@ -8,14 +8,17 @@ namespace ParkingLotManagement
 {
     public class ParkingLot
     {
+        private Dictionary<string, string> ticket2Car = new Dictionary<string, string>();
+
         public string Fetch(string ticket)
         {
-            return ticket;
+            return ticket2Car[ticket];
         }
 
         public string Park(string carName)
         {
-            string ticket = carName;
+            string ticket = $"Ticket-{carName}";
+            ticket2Car[ticket] = carName;
             return ticket;
         }
     }
