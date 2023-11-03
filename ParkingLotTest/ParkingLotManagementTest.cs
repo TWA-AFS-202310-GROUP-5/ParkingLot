@@ -13,7 +13,7 @@ namespace ParkingLotManagementTest
         [Theory]
         [InlineData("Car")]
         [InlineData("Car2")]
-        public void Should_return_ticket_when_user_parking_given_car(string carName)
+        public void Should_return_ticket_when_costumer_parking_given_car(string carName)
         {
             ParkingLot parkingLot = new ParkingLot();
             string ticket = parkingLot.Park(carName);
@@ -25,7 +25,7 @@ namespace ParkingLotManagementTest
 
         [Theory]
         [InlineData("Car1", "Car2")]
-        public void Should_return_correct_ticket_when_many_users_parking_given_car(string carName1, string carName2)
+        public void Should_return_correct_ticket_when_many_costumers_parking_given_car(string carName1, string carName2)
         {
             ParkingLot parkingLot = new ParkingLot();
             string ticket1 = parkingLot.Park(carName1);
@@ -42,7 +42,7 @@ namespace ParkingLotManagementTest
 
         [Theory]
         [InlineData("Car1", "Car2")]
-        public void Should_return_empty_when_using_incorrect_ticket(string carNameCorrect, string carNameFalse)
+        public void Should_return_empty_when_costumer_using_incorrect_ticket(string carNameCorrect, string carNameFalse)
         {
             ParkingLot parkingLot = new ParkingLot();
             string ticketCorrect = parkingLot.Park(carNameCorrect);
@@ -55,7 +55,7 @@ namespace ParkingLotManagementTest
 
         [Theory]
         [InlineData("Car1")]
-        public void Should_return_empty_when_using_null_ticket(string carNameCorrect)
+        public void Should_return_empty_when_costumer_using_null_ticket(string carNameCorrect)
         {
             ParkingLot parkingLot = new ParkingLot();
             string ticketCorrect = parkingLot.Park(carNameCorrect);
@@ -63,6 +63,19 @@ namespace ParkingLotManagementTest
 
             string carReceived = parkingLot.Fetch(ticketNull);
 
+            Assert.Equal(string.Empty, carReceived);
+        }
+
+        [Theory]
+        [InlineData("Car")]
+        [InlineData("Car2")]
+        public void Should_return_empty_when_costumer_fetching_car_with_used_ticket(string carName)
+        {
+            ParkingLot parkingLot = new ParkingLot();
+            string ticket = parkingLot.Park(carName);
+
+            string carReceived = parkingLot.Fetch(ticket);
+            carReceived = parkingLot.Fetch(ticket);
             Assert.Equal(string.Empty, carReceived);
         }
     }
