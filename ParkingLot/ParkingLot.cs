@@ -27,7 +27,7 @@ namespace ParkingLotManagement
 
         public Ticket Park(string carName)
         {
-            if (EmptyPositionLeft() == 0)
+            if (EmptyPositionLeft() != 0)
             {
                 Ticket ticket = new Ticket(carName);
                 Ticket2Car[ticket] = carName;
