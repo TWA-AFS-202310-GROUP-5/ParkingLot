@@ -8,7 +8,7 @@ using ParkingLot;
 
 namespace ParkingLotTest
 {
-    public class ParkingLotTest
+    public class ParkingTest
     {
         [Fact]
         public void Should_return_car_when_fetch_given_ticket()
@@ -23,7 +23,18 @@ namespace ParkingLotTest
         }
 
         [Fact]
-        public void should_return_right_when_park_given_car()
+        public void should_return_parked_car_when_fetch_given_ticket()
+        {
+            var parkingLot = new Parking();
+            var ticket1 = parkingLot.Park("car1");
+
+            var car1 = parkingLot.Fetch(ticket1);
+
+            Assert.Equal("car1", car1);
+        }
+
+        [Fact]
+        public void should_return_two_parked_car_when_fetch_given_two_ticket()
         {
             var parkingLot = new Parking();
             var ticket1 = parkingLot.Park("car1");
@@ -57,6 +68,27 @@ namespace ParkingLotTest
             var car = parkingLot.Fetch(ticket);
 
             var result = parkingLot.Fetch(ticket);
+
+            Assert.Equal("", result);
+        }
+
+        [Fact]
+        public void Should_return_empty_ticket_when_park_given_parking_is_full()
+        {
+            var parkingLot = new Parking();
+            var ticket1 = parkingLot.Park("car1");
+            var ticket2 = parkingLot.Park("car2");
+            var ticket3 = parkingLot.Park("car3");
+            var ticket4 = parkingLot.Park("car4");
+            var ticket5 = parkingLot.Park("car5");
+            var ticket6 = parkingLot.Park("car6");
+            var ticket7 = parkingLot.Park("car7");
+            var ticket8 = parkingLot.Park("car8");
+            var ticket9 = parkingLot.Park("car9");
+            var ticket10 = parkingLot.Park("car10");
+
+            var result = parkingLot.Park("car11");
+
 
             Assert.Equal("", result);
         }

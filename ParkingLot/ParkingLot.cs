@@ -10,9 +10,14 @@ namespace ParkingLot
     public class Parking
     {
         private Dictionary<string, string> ticket2car = new Dictionary<string, string>();
+        private readonly int capacity = 10;
 
         public string Park(string car)
         {
+            if (ticket2car.Count >= capacity)
+            {
+                return "";
+            }
             var ticket = "T-" + car;
             this.ticket2car.Add(ticket,car);
             return ticket;
