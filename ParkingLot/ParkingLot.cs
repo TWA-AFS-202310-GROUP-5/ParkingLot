@@ -8,14 +8,15 @@ namespace ParkingLotManagement
 {
     public class ParkingLot
     {
-        public object Fetch(object ticket)
+        public string Fetch(string ticket)
         {
-            throw new NotImplementedException();
+            return ticket;
         }
 
-        public object Park(string carName)
+        public string Park(string carName)
         {
-            throw new NotImplementedException();
+            string ticket = carName;
+            return ticket;
         }
     }
 }

@@ -15,9 +15,9 @@ namespace ParkingLotManagementTest
         public void Should_return_ticket_when_user_parking_given_car(string carName)
         {
             ParkingLot parkingLot = new ParkingLot();
-            var ticket = parkingLot.Park(carName);
+            string ticket = parkingLot.Park(carName);
 
-            var carReceived = parkingLot.Fetch(ticket);
+            string carReceived = parkingLot.Fetch(ticket);
 
             Assert.Equal(carName, carReceived);
         }
