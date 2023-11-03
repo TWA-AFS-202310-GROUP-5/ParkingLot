@@ -6,16 +6,16 @@ namespace ParkingLot
 {
     public class ParkingBoy
     {
-        private List<ParkingLot> parkingLots = new List<ParkingLot>();
+        private Dictionary<Guid, ParkingLot> parkingLots= new Dictionary<Guid, ParkingLot>();
 
         public ParkingBoy(ParkingLot parkingLot)
         {
-            parkingLots.Add(parkingLot);
+            parkingLots.Add(parkingLot.Id, parkingLot);
         }
 
         public ParkingBoy(ParkingLot[] parkingLots)
         {
-            parkingLots.ToList().ForEach(parkingLot => this.parkingLots.Add(parkingLot));
+            parkingLots.ToList().ForEach(parkingLot => this.parkingLots.Add(parkingLot.Id, parkingLot));
         }
 
         public Ticket Park(Car car)
@@ -23,6 +23,7 @@ namespace ParkingLot
             try
             {
                 return parkingLots
+                    .Values
                     .Where(parkingLot => parkingLot.EmptyLotNum > 0)
                     .First()
                     .Park(car);
@@ -37,12 +38,9 @@ namespace ParkingLot
         {
             try
             {
-                return parkingLots
-                    .Where(parkingLot => parkingLot.HasCar(ticket))
-                    .First()
-                    .Fetch(ticket);
+                return parkingLots[ticket.ParkingLotId].Fetch(ticket);
             }
-            catch (Exception)
+            catch (KeyNotFoundException)
             {
                 throw new InvalidTicketException();
             }

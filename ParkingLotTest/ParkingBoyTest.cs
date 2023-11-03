@@ -118,40 +118,41 @@ namespace ParkingLotTest
         }
 
         // ------------------------------------------ two parking lot for signle parking boy ------------------------------------------
-        //[Fact]
-        //public void Should_parked_in_first_parking_lot_when_park_car_given_two_parking_lot_a_standard_parking_boy_and_a_car()
-        //{
-        //    //Given
-        //    int capacity = 10;
-        //    ParkingLot parkinglot = new ParkingLot(capacity);
-        //    ParkingBoy parkingBoy = new ParkingBoy(parkinglot);
-        //    Car car = new Car();
+        [Fact]
+        public void Should_parked_in_first_parking_lot_when_park_car_given_two_parking_lot_a_standard_parking_boy_and_a_car()
+        {
+            //Given
+            int capacity = 1;
+            ParkingLot parkinglot1 = new ParkingLot(capacity);
+            ParkingLot parkinglot2 = new ParkingLot(capacity);
+            ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot[] { parkinglot1, parkinglot2 });
+            Car car = new Car();
 
-        //    //When
-        //    var ticket = parkingBoy.Park(car);
+            //When
+            var ticket = parkingBoy.Park(car);
 
-        //    //Then
-        //    Assert.IsType<Ticket>(ticket);
-        //}
+            //Then
+            Assert.Equal(parkinglot1.Id, ticket.ParkingLotId);
+        }
 
-        //[Fact]
-        //public void Should_parked_in_second_parking_lot_when_park_car_given_a_standard_parking_boy_and_first_full_parking_lot_second_empty_parking_lot_and_a_car()
-        //{
-        //    //Given
-        //    int capacity = 1;
-        //    ParkingLot parkinglot1 = new ParkingLot(capacity);
-        //    ParkingLot parkinglot2 = new ParkingLot(capacity);
-        //    ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot[] { parkinglot1, parkinglot2 });
-        //    Car car1 = new Car();
-        //    Car car2 = new Car();
-        //    var ticket1 = parkingBoy.Park(car1);
+        [Fact]
+        public void Should_parked_in_second_parking_lot_when_park_car_given_a_standard_parking_boy_and_first_full_parking_lot_second_empty_parking_lot_and_a_car()
+        {
+            //Given
+            int capacity = 1;
+            ParkingLot parkinglot1 = new ParkingLot(capacity);
+            ParkingLot parkinglot2 = new ParkingLot(capacity);
+            ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot[] { parkinglot1, parkinglot2 });
+            Car car1 = new Car();
+            Car car2 = new Car();
+            var ticket1 = parkingBoy.Park(car1);
 
-        //    //When
-        //    var result = parkingBoy.Park(car2);
+            //When
+            var ticket2 = parkingBoy.Park(car2);
 
-        //    //Then
-        //    Assert.True(parkingBoy == result);
-        //}
+            //Then
+            Assert.Equal(parkinglot2.Id, ticket2.ParkingLotId);
+        }
 
         [Fact]
         public void Should_return_the_right_cars_when_fetch_car_twice_given_a_standard_parking_boy_and_two_nonEmpty_parking_lot_and_a_car()
