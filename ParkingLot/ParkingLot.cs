@@ -27,7 +27,7 @@ namespace ParkingLotManagement
 
         public Ticket Park(string carName)
         {
-            if (EmptyPositionLeft() != 0)
+            if (GetEmptyPosition() != 0)
             {
                 Ticket ticket = new Ticket(carName);
                 Ticket2Car[ticket] = carName;
@@ -39,7 +39,7 @@ namespace ParkingLotManagement
             }
         }
 
-        public int EmptyPositionLeft()
+        public int GetEmptyPosition()
         {
             return Capacity - Ticket2Car.Count;
         }
