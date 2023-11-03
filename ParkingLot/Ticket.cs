@@ -13,12 +13,12 @@ namespace ParkingLotManagement
         private bool isValid;
         public Ticket(string car, string name)
         {
-            Name = $"Ticket-{car}";
+            CarName = car;
             isValid = true;
             parkingLot = name;
         }
 
-        public string Name
+        public string CarName
         {
             get { return carName; } set { carName = value; }
         }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Xunit;
 using ParkingLotManagement;
 using static System.Collections.Specialized.BitVector32;
+using System.Net.Sockets;
 
 namespace ParkingLotManagementTest
 {
@@ -35,8 +36,8 @@ namespace ParkingLotManagementTest
             string carReceived1 = parkingLot.Fetch(ticket1);
             string carReceived2 = parkingLot.Fetch(ticket2);
 
-            Assert.Equal($"Ticket-{carName1}", ticket1.Name);
-            Assert.Equal($"Ticket-{carName2}", ticket2.Name);
+            Assert.Equal(carName1, ticket1.CarName);
+            Assert.Equal(carName2, ticket2.CarName);
             Assert.Equal(carName1, carReceived1);
             Assert.Equal(carName2, carReceived2);
         }
@@ -103,60 +104,71 @@ namespace ParkingLotManagementTest
         [Theory]
         [InlineData("Car")]
         [InlineData("Car2")]
-        public void Should_parking_boy_return_ticket_when_costumer_parking_given_car(string carName)
+        public void Should_parking_boy_park_car_to_first_lot_given_two_available_lots(string carName)
         {
-            ParkingLot parkingLot = new ParkingLot();
-            ParkingBoy parkingBoy = new ParkingBoy();
-            parkingBoy.AddParkingLot(parkingLot);
+            ParkingLot parkingLot1 = new ParkingLot("1");
+            ParkingLot parkingLot2 = new ParkingLot("2");
+            StandardParkingBoy parkingBoy = new StandardParkingBoy();
+            parkingBoy.AddParkingLot(parkingLot1);
+            parkingBoy.AddParkingLot(parkingLot2);
+
             Ticket ticket = parkingBoy.Park(carName);
 
-            string carReceived = parkingBoy.Fetch(ticket);
+            Assert.Equal("1", ticket.ParkingLot);
+        }
 
-            Assert.Equal(carName, carReceived);
+        [Theory]
+        [InlineData("Car")]
+        public void Should_parking_boy_park_car_to_second_given_first_full(string carName)
+        {
+            ParkingLot parkingLot1 = new ParkingLot("1");
+            ParkingLot parkingLot2 = new ParkingLot("2");
+            StandardParkingBoy parkingBoy = new StandardParkingBoy();
+            parkingBoy.AddParkingLot(parkingLot1);
+            parkingBoy.AddParkingLot(parkingLot2);
+            for (var i = 0; i < parkingLot1.Capacity; i++)
+            {
+                Ticket teampTicket = parkingBoy.Park(carName + i);
+            }
+
+            Ticket ticket = parkingBoy.Park(carName);
+
+            Assert.Equal("2", ticket.ParkingLot);
         }
 
         [Theory]
         [InlineData("Car1", "Car2")]
-        public void Should_parking_boy_return_correct_ticket_when_many_costumers_parking_given_car(string carName1, string carName2)
+        public void Should_parking_boy_return_correct_car_given_two_car_in_two_parkinglots(string carName1, string carName2)
         {
-            ParkingLot parkingLot = new ParkingLot();
-            ParkingBoy parkingBoy = new ParkingBoy();
-            parkingBoy.AddParkingLot(parkingLot);
+            ParkingLot parkingLot1 = new ParkingLot("1");
+            ParkingLot parkingLot2 = new ParkingLot("2");
+            StandardParkingBoy parkingBoy = new StandardParkingBoy();
+            parkingBoy.AddParkingLot(parkingLot1);
+            parkingBoy.AddParkingLot(parkingLot2);
+
             Ticket ticket1 = parkingBoy.Park(carName1);
+            for (var i = 0; i < parkingLot1.Capacity; i++)
+            {
+                Ticket teampTicket = parkingBoy.Park(carName1 + i);
+            }
+
             Ticket ticket2 = parkingBoy.Park(carName2);
+            string receivedCar1 = parkingBoy.Fetch(ticket1);
+            string receivedCar2 = parkingBoy.Fetch(ticket2);
 
-            string carReceived1 = parkingBoy.Fetch(ticket1);
-            string carReceived2 = parkingBoy.Fetch(ticket2);
-
-            Assert.Equal($"Ticket-{carName1}", ticket1.Name);
-            Assert.Equal($"Ticket-{carName2}", ticket2.Name);
-            Assert.Equal(carName1, carReceived1);
-            Assert.Equal(carName2, carReceived2);
-        }
-
-        [Theory]
-        [InlineData("Car1", "Car2")]
-        public void Should_parking_boy_return_empty_when_costumer_using_incorrect_ticket(string carNameCorrect, string carNameFalse)
-        {
-            ParkingLot parkingLot = new ParkingLot();
-            ParkingBoy parkingBoy = new ParkingBoy();
-            parkingBoy.AddParkingLot(parkingLot);
-            Ticket ticketCorrect = parkingBoy.Park(carNameCorrect);
-            Ticket ticketFalse = new Ticket(carNameFalse, parkingLot.Name);
-
-            Action action = () => parkingBoy.Fetch(ticketFalse);
-
-            var exception = Assert.Throws<WrongTicketExceptoion>(action);
-            Assert.Equal("Unrecognized parking ticket.", exception.Message);
+            Assert.Equal(carName1, receivedCar1);
+            Assert.Equal(carName2, receivedCar2);
         }
 
         [Theory]
         [InlineData("Car1")]
         public void Should_parking_boy_return_empty_when_costumer_using_null_ticket(string carNameCorrect)
         {
-            ParkingLot parkingLot = new ParkingLot();
-            ParkingBoy parkingBoy = new ParkingBoy();
-            parkingBoy.AddParkingLot(parkingLot);
+            ParkingLot parkingLot1 = new ParkingLot("1");
+            ParkingLot parkingLot2 = new ParkingLot("2");
+            StandardParkingBoy parkingBoy = new StandardParkingBoy();
+            parkingBoy.AddParkingLot(parkingLot1);
+            parkingBoy.AddParkingLot(parkingLot2);
             Ticket ticketCorrect = parkingBoy.Park(carNameCorrect);
             Ticket ticketNull = null;
 
@@ -171,9 +183,11 @@ namespace ParkingLotManagementTest
         [InlineData("Car2")]
         public void Should_parking_boy_throw_exception_when_costumer_fetching_car_with_used_ticket(string carName)
         {
-            ParkingLot parkingLot = new ParkingLot();
-            ParkingBoy parkingBoy = new ParkingBoy();
-            parkingBoy.AddParkingLot(parkingLot);
+            ParkingLot parkingLot1 = new ParkingLot("1");
+            ParkingLot parkingLot2 = new ParkingLot("2");
+            StandardParkingBoy parkingBoy = new StandardParkingBoy();
+            parkingBoy.AddParkingLot(parkingLot1);
+            parkingBoy.AddParkingLot(parkingLot2);
             Ticket ticket = parkingBoy.Park(carName);
             string carReceived = parkingBoy.Fetch(ticket);
 
@@ -184,18 +198,21 @@ namespace ParkingLotManagementTest
         }
 
         [Theory]
-        [InlineData("Car", "Parking Lot AAA", 10)]
-        public void Should_parking_boy_return_no_ticket_when_parking_lot_has_no_position_left(string carName, string parkingLotName,  int capacity)
+        [InlineData("Car", "Parking Lot AAA")]
+        public void Should_parking_boy_return_no_ticket_when_parking_lot_has_no_position_left(string carName, string parkingLotName)
         {
-            ParkingLot parkingLot = new ParkingLot(parkingLotName);
-            ParkingBoy parkingBoy = new ParkingBoy();
-            parkingBoy.AddParkingLot(parkingLot);
-            for (var i = 0; i < capacity; i++)
+            ParkingLot parkingLot1 = new ParkingLot("1");
+            ParkingLot parkingLot2 = new ParkingLot("2");
+            StandardParkingBoy parkingBoy = new StandardParkingBoy();
+            parkingBoy.AddParkingLot(parkingLot1);
+            parkingBoy.AddParkingLot(parkingLot2);
+
+            for (var i = 0; i < 2 * parkingLot1.Capacity; i++)
             {
                 Ticket teampTicket = parkingBoy.Park(carName + i);
             }
 
-            Action action = () => parkingBoy.Park(carName + capacity);
+            Action action = () => parkingBoy.Park(carName + parkingLot1.Capacity);
 
             var exception = Assert.Throws<WrongTicketExceptoion>(action);
             Assert.Equal("No available position.", exception.Message);

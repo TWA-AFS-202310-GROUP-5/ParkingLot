@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace ParkingLotManagement
 {
-    public class ParkingBoy
+    public class StandardParkingBoy
     {
         private List<ParkingLot> parkingLots;
 
-        public ParkingBoy()
+        public StandardParkingBoy()
         {
             ParkingLots = new List<ParkingLot>();
         }
 
-        public ParkingBoy(List<ParkingLot> p)
+        public StandardParkingBoy(List<ParkingLot> p)
         {
             ParkingLots = p;
         }
@@ -33,7 +33,7 @@ namespace ParkingLotManagement
 
         public Ticket Park(string carName)
         {
-            var firstAvailableParkingLot = ParkingLots.FirstOrDefault(x => x.GetEmptyPosition() > 0);
+            var firstAvailableParkingLot = GetFirstAvailableParkingLot();
             if (firstAvailableParkingLot == null)
             {
                 throw new WrongTicketExceptoion("No available position.");
@@ -57,6 +57,11 @@ namespace ParkingLotManagement
             }
 
             throw new WrongTicketExceptoion("Unrecognized parking ticket.");
+        }
+
+        public virtual ParkingLot GetFirstAvailableParkingLot()
+        {
+            return ParkingLots.FirstOrDefault(x => x.GetEmptyPosition() > 0);
         }
     }
 }
