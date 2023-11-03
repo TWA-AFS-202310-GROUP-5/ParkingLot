@@ -39,5 +39,31 @@ namespace ParkingLotManagementTest
             Assert.Equal(carName1, carReceived1);
             Assert.Equal(carName2, carReceived2);
         }
+
+        [Theory]
+        [InlineData("Car1", "Car2")]
+        public void Should_return_empty_when_using_incorrect_ticket(string carNameCorrect, string carNameFalse)
+        {
+            ParkingLot parkingLot = new ParkingLot();
+            string ticketCorrect = parkingLot.Park(carNameCorrect);
+            string ticketFalse = $"Ticket-{carNameFalse}";
+
+            string carReceived = parkingLot.Fetch(ticketFalse);
+
+            Assert.Equal(string.Empty, carReceived);
+        }
+
+        [Theory]
+        [InlineData("Car1")]
+        public void Should_return_empty_when_using_null_ticket(string carNameCorrect)
+        {
+            ParkingLot parkingLot = new ParkingLot();
+            string ticketCorrect = parkingLot.Park(carNameCorrect);
+            string ticketNull = string.Empty;
+
+            string carReceived = parkingLot.Fetch(ticketNull);
+
+            Assert.Equal(string.Empty, carReceived);
+        }
     }
 }

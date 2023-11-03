@@ -12,7 +12,7 @@ namespace ParkingLotManagement
 
         public string Fetch(string ticket)
         {
-            return ticket2Car[ticket];
+            return ticket2Car.ContainsKey(ticket) ? ticket2Car[ticket] : string.Empty;
         }
 
         public string Park(string carName)
