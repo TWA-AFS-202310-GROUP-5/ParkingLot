@@ -108,7 +108,8 @@ namespace ParkingLotManagementTest
         {
             ParkingLot parkingLot1 = new ParkingLot("1");
             ParkingLot parkingLot2 = new ParkingLot("2");
-            StandardParkingBoy parkingBoy = new StandardParkingBoy();
+            ParkingBoy parkingBoy = new ParkingBoy();
+            parkingBoy.SetStrategy(new StandardStrategy());
             parkingBoy.AddParkingLot(parkingLot1);
             parkingBoy.AddParkingLot(parkingLot2);
 
@@ -123,7 +124,8 @@ namespace ParkingLotManagementTest
         {
             ParkingLot parkingLot1 = new ParkingLot("1");
             ParkingLot parkingLot2 = new ParkingLot("2");
-            StandardParkingBoy parkingBoy = new StandardParkingBoy();
+            ParkingBoy parkingBoy = new ParkingBoy();
+            parkingBoy.SetStrategy(new StandardStrategy());
             parkingBoy.AddParkingLot(parkingLot1);
             parkingBoy.AddParkingLot(parkingLot2);
             for (var i = 0; i < parkingLot1.Capacity; i++)
@@ -142,7 +144,8 @@ namespace ParkingLotManagementTest
         {
             ParkingLot parkingLot1 = new ParkingLot("1");
             ParkingLot parkingLot2 = new ParkingLot("2");
-            StandardParkingBoy parkingBoy = new StandardParkingBoy();
+            ParkingBoy parkingBoy = new ParkingBoy();
+            parkingBoy.SetStrategy(new StandardStrategy());
             parkingBoy.AddParkingLot(parkingLot1);
             parkingBoy.AddParkingLot(parkingLot2);
 
@@ -166,7 +169,8 @@ namespace ParkingLotManagementTest
         {
             ParkingLot parkingLot1 = new ParkingLot("1");
             ParkingLot parkingLot2 = new ParkingLot("2");
-            StandardParkingBoy parkingBoy = new StandardParkingBoy();
+            ParkingBoy parkingBoy = new ParkingBoy();
+            parkingBoy.SetStrategy(new StandardStrategy());
             parkingBoy.AddParkingLot(parkingLot1);
             parkingBoy.AddParkingLot(parkingLot2);
             Ticket ticketCorrect = parkingBoy.Park(carNameCorrect);
@@ -185,7 +189,8 @@ namespace ParkingLotManagementTest
         {
             ParkingLot parkingLot1 = new ParkingLot("1");
             ParkingLot parkingLot2 = new ParkingLot("2");
-            StandardParkingBoy parkingBoy = new StandardParkingBoy();
+            ParkingBoy parkingBoy = new ParkingBoy();
+            parkingBoy.SetStrategy(new StandardStrategy());
             parkingBoy.AddParkingLot(parkingLot1);
             parkingBoy.AddParkingLot(parkingLot2);
             Ticket ticket = parkingBoy.Park(carName);
@@ -203,7 +208,8 @@ namespace ParkingLotManagementTest
         {
             ParkingLot parkingLot1 = new ParkingLot("1");
             ParkingLot parkingLot2 = new ParkingLot("2");
-            StandardParkingBoy parkingBoy = new StandardParkingBoy();
+            ParkingBoy parkingBoy = new ParkingBoy();
+            parkingBoy.SetStrategy(new StandardStrategy());
             parkingBoy.AddParkingLot(parkingLot1);
             parkingBoy.AddParkingLot(parkingLot2);
 
@@ -225,7 +231,8 @@ namespace ParkingLotManagementTest
         {
             ParkingLot parkingLot1 = new ParkingLot("1");
             ParkingLot parkingLot2 = new ParkingLot("2");
-            SmartParkingBoy parkingBoy = new SmartParkingBoy();
+            ParkingBoy parkingBoy = new ParkingBoy();
+            parkingBoy.SetStrategy(new SmartStrategy());
             parkingBoy.AddParkingLot(parkingLot1);
             parkingBoy.AddParkingLot(parkingLot2);
             for (var i = 0; i < 5; i++)
@@ -249,7 +256,8 @@ namespace ParkingLotManagementTest
         {
             ParkingLot parkingLot1 = new ParkingLot("1");
             ParkingLot parkingLot2 = new ParkingLot("2");
-            SmartParkingBoy parkingBoy = new SmartParkingBoy();
+            ParkingBoy parkingBoy = new ParkingBoy();
+            parkingBoy.SetStrategy(new SmartStrategy());
             parkingBoy.AddParkingLot(parkingLot1);
             parkingBoy.AddParkingLot(parkingLot2);
             for (var i = 0; i < parkingLot1.Capacity; i++)
@@ -268,7 +276,8 @@ namespace ParkingLotManagementTest
         {
             ParkingLot parkingLot1 = new ParkingLot("1");
             ParkingLot parkingLot2 = new ParkingLot("2");
-            SmartParkingBoy parkingBoy = new SmartParkingBoy();
+            ParkingBoy parkingBoy = new ParkingBoy();
+            parkingBoy.SetStrategy(new SmartStrategy());
             parkingBoy.AddParkingLot(parkingLot1);
             parkingBoy.AddParkingLot(parkingLot2);
 
@@ -292,7 +301,8 @@ namespace ParkingLotManagementTest
         {
             ParkingLot parkingLot1 = new ParkingLot("1");
             ParkingLot parkingLot2 = new ParkingLot("2");
-            StandardParkingBoy parkingBoy = new StandardParkingBoy();
+            ParkingBoy parkingBoy = new ParkingBoy();
+            parkingBoy.SetStrategy(new StandardStrategy());
             parkingBoy.AddParkingLot(parkingLot1);
             parkingBoy.AddParkingLot(parkingLot2);
             Ticket ticketCorrect = parkingBoy.Park(carNameCorrect);
@@ -311,7 +321,8 @@ namespace ParkingLotManagementTest
         {
             ParkingLot parkingLot1 = new ParkingLot("1");
             ParkingLot parkingLot2 = new ParkingLot("2");
-            SmartParkingBoy parkingBoy = new SmartParkingBoy();
+            ParkingBoy parkingBoy = new ParkingBoy();
+            parkingBoy.SetStrategy(new SmartStrategy());
             parkingBoy.AddParkingLot(parkingLot1);
             parkingBoy.AddParkingLot(parkingLot2);
             Ticket ticket = parkingBoy.Park(carName);
@@ -329,7 +340,8 @@ namespace ParkingLotManagementTest
         {
             ParkingLot parkingLot1 = new ParkingLot("1");
             ParkingLot parkingLot2 = new ParkingLot("2");
-            SmartParkingBoy parkingBoy = new SmartParkingBoy();
+            ParkingBoy parkingBoy = new ParkingBoy();
+            parkingBoy.SetStrategy(new SmartStrategy());
             parkingBoy.AddParkingLot(parkingLot1);
             parkingBoy.AddParkingLot(parkingLot2);
 
