@@ -48,15 +48,14 @@ namespace ParkingLotTest
         }
 
         [Fact]
-        public void Should_return_empty_when_fetch_given_wrong_ticket()
+        public void Should_return_exception_when_fetch_given_wrong_ticket()
         {
             var parkingLot = new Parking();
             var ticket1 = parkingLot.Park("car1");
             var ticket2 = parkingLot.Park("car2");
 
-            var car = parkingLot.Fetch("ticket do not exit.");
-
-            Assert.Equal("",car);
+            var result = Assert.Throws<UnrecognizedTicketException>(() =>parkingLot.Fetch("ticket do not exit."));
+            Assert.Equal("Unrecognized parking ticket", result.Message);
         }
 
         [Fact]

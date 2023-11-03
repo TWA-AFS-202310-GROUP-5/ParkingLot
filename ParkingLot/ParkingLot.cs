@@ -31,7 +31,10 @@ namespace ParkingLot
                 this.ticket2car.Remove(ticket);
                 return car;
             }
-            return "";
+            else
+            {
+                throw new UnrecognizedTicketException("Unrecognized parking ticket");
+            }
         }
     
 }
