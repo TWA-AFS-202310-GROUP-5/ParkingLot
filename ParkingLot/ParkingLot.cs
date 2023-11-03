@@ -16,7 +16,7 @@ namespace ParkingLot
         {
             if (ticket2car.Count >= capacity)
             {
-                return "";
+                throw new NoAvailablePositionException("No available position");
             }
             var ticket = "T-" + car;
             this.ticket2car.Add(ticket,car);
