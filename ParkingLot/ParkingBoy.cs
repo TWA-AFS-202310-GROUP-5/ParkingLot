@@ -33,7 +33,13 @@ namespace ParkingLotManagement
 
         public Ticket Park(string carName)
         {
-            return ParkingLots.Find(x => x.GetEmptyPosition() != 0).Park(carName);
+            var firstAvailableParkingLot = ParkingLots.FirstOrDefault(x => x.GetEmptyPosition() > 0);
+            if (firstAvailableParkingLot == null)
+            {
+                throw new WrongTicketExceptoion("No available position.");
+            }
+
+            return firstAvailableParkingLot.Park(carName);
         }
 
         public string Fetch(Ticket ticket)
