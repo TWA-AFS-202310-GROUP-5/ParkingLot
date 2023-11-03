@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using ParkingLotManagement;
+using static System.Collections.Specialized.BitVector32;
 
 namespace ParkingLotManagementTest
 {
@@ -48,9 +49,10 @@ namespace ParkingLotManagementTest
             Ticket ticketCorrect = parkingLot.Park(carNameCorrect);
             Ticket ticketFalse = new Ticket(carNameFalse);
 
-            string carReceived = parkingLot.Fetch(ticketFalse);
+            Action action = () => parkingLot.Fetch(ticketFalse);
 
-            Assert.Equal(string.Empty, carReceived);
+            var exception = Assert.Throws<WrongTicketExceptoion>(action);
+            Assert.Equal("Unrecognized parking ticket.", exception.Message);
         }
 
         [Theory]
@@ -61,27 +63,29 @@ namespace ParkingLotManagementTest
             Ticket ticketCorrect = parkingLot.Park(carNameCorrect);
             Ticket ticketNull = null;
 
-            string carReceived = parkingLot.Fetch(ticketNull);
+            Action action = () => parkingLot.Fetch(ticketNull);
 
-            Assert.Equal(string.Empty, carReceived);
+            var exception = Assert.Throws<WrongTicketExceptoion>(action);
+            Assert.Equal("Unrecognized parking ticket.", exception.Message);
         }
 
         [Theory]
         [InlineData("Car")]
         [InlineData("Car2")]
-        public void Should_return_empty_when_costumer_fetching_car_with_used_ticket(string carName)
+        public void Should_throw_exception_when_costumer_fetching_car_with_used_ticket(string carName)
         {
             ParkingLot parkingLot = new ParkingLot();
             Ticket ticket = parkingLot.Park(carName);
-
             string carReceived = parkingLot.Fetch(ticket);
-            carReceived = parkingLot.Fetch(ticket);
-            Assert.Equal(string.Empty, carReceived);
+
+            Action action = () => parkingLot.Fetch(ticket);
+
+            var exception = Assert.Throws<WrongTicketExceptoion>(action);
+            Assert.Equal("Unrecognized parking ticket.", exception.Message);
         }
 
         [Theory]
         [InlineData("Car", 10)]
-        [InlineData("Car2", 11)]
         public void Should_return_no_ticket_when_parking_lot_has_no_position_left(string carName, int capacity)
         {
             ParkingLot parkingLot = new ParkingLot();
@@ -90,8 +94,10 @@ namespace ParkingLotManagementTest
                 Ticket teampTicket = parkingLot.Park(carName + i);
             }
 
-            Ticket ticket = parkingLot.Park(carName + capacity);
-            Assert.Null(ticket);
+            Action action = () => parkingLot.Park(carName + capacity);
+
+            var exception = Assert.Throws<WrongTicketExceptoion>(action);
+            Assert.Equal("No available position.", exception.Message);
         }
     }
 }

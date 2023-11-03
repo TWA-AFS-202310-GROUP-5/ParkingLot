@@ -16,20 +16,13 @@ namespace ParkingLotManagement
 
         public string Fetch(Ticket ticket)
         {
-            if (ticket == null)
+            if (ticket == null || !Ticket2Car.ContainsKey(ticket) || ticket.IsValid == false)
             {
-                return string.Empty;
+                throw new WrongTicketExceptoion("Unrecognized parking ticket.");
             }
 
-            if (ticket.IsValid == true)
-            {
-                ticket.IsValid = false;
-                return Ticket2Car.ContainsKey(ticket) ? Ticket2Car[ticket] : string.Empty;
-            }
-            else
-            {
-                return string.Empty;
-            }
+            ticket.IsValid = false;
+            return Ticket2Car[ticket];
         }
 
         public Ticket Park(string carName)
@@ -42,7 +35,7 @@ namespace ParkingLotManagement
             }
             else
             {
-                return null;
+                throw new WrongTicketExceptoion("No available position.");
             }
         }
 
