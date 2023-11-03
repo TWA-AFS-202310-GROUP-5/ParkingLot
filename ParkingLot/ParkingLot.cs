@@ -1,8 +1,6 @@
 ﻿namespace ParkingLot
 {
-    using System;
     using System.Collections.Generic;
-    using System.Data;
 
     public class ParkingLot
     {
@@ -22,7 +20,7 @@
             Car car = ticketCarMap.GetValueOrDefault(ticket, null);
             if (car is null)
             {
-                throw new InvalidOperationException("Unrecognized parking ticket.");
+                throw new InvalidTicketException();
             }
 
             ticketCarMap.Remove(ticket);
@@ -34,7 +32,7 @@
         {
             if (EmptyLotNum == 0)
             {
-                throw new InvalidOperationException("No available position.");
+                throw new FullLotException();
             }
 
             Ticket ticket = new Ticket();
