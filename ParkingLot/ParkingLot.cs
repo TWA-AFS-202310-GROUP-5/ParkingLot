@@ -8,7 +8,11 @@ namespace ParkingLotManagement
 {
     public class ParkingLot
     {
+        private int capacity = 10;
         private Dictionary<Ticket, string> ticket2Car = new Dictionary<Ticket, string>();
+
+        public int Capacity { get => capacity; set => capacity = value; }
+        public Dictionary<Ticket, string> Ticket2Car { get => ticket2Car; set => ticket2Car = value; }
 
         public string Fetch(Ticket ticket)
         {
@@ -20,7 +24,7 @@ namespace ParkingLotManagement
             if (ticket.IsValid == true)
             {
                 ticket.IsValid = false;
-                return ticket2Car.ContainsKey(ticket) ? ticket2Car[ticket] : string.Empty;
+                return Ticket2Car.ContainsKey(ticket) ? Ticket2Car[ticket] : string.Empty;
             }
             else
             {
@@ -30,9 +34,21 @@ namespace ParkingLotManagement
 
         public Ticket Park(string carName)
         {
-            Ticket ticket = new Ticket(carName);
-            ticket2Car[ticket] = carName;
-            return ticket;
+            if (IsEmptyPositionLeft())
+            {
+                Ticket ticket = new Ticket(carName);
+                Ticket2Car[ticket] = carName;
+                return ticket;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public bool IsEmptyPositionLeft()
+        {
+            return Ticket2Car.Count < Capacity;
         }
     }
 }

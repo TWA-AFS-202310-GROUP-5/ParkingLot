@@ -78,5 +78,20 @@ namespace ParkingLotManagementTest
             carReceived = parkingLot.Fetch(ticket);
             Assert.Equal(string.Empty, carReceived);
         }
+
+        [Theory]
+        [InlineData("Car", 10)]
+        [InlineData("Car2", 11)]
+        public void Should_return_no_ticket_when_parking_lot_has_no_position_left(string carName, int capacity)
+        {
+            ParkingLot parkingLot = new ParkingLot();
+            for (var i = 0; i < capacity; i++)
+            {
+                Ticket teampTicket = parkingLot.Park(carName + i);
+            }
+
+            Ticket ticket = parkingLot.Park(carName + capacity);
+            Assert.Null(ticket);
+        }
     }
 }
