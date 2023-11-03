@@ -8,7 +8,11 @@ namespace ParkingLotManagement
 {
     public class StandardStrategy : IStrategy
     {
+<<<<<<< HEAD
         public ParkingLot GetFirstAvailableParkingLot(List<ParkingLot> parkingLots)
+=======
+        ParkingLot IStrategy.GetFirstAvailableParkingLot(List<ParkingLot> parkingLots)
+>>>>>>> 3f3152a0df0d542462716adbb19f0c7297740456
         {
             return parkingLots.FirstOrDefault(x => x.GetEmptyPosition() > 0);
         }
