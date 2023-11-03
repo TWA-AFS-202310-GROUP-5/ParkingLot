@@ -6,7 +6,7 @@ namespace ParkingLot
 {
     public class ParkingBoy
     {
-        private Dictionary<Guid, ParkingLot> parkingLots= new Dictionary<Guid, ParkingLot>();
+        private Dictionary<Guid, ParkingLot> parkingLots = new Dictionary<Guid, ParkingLot>();
 
         public ParkingBoy(ParkingLot parkingLot)
         {
