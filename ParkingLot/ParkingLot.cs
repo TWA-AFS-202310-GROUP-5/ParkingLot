@@ -8,16 +8,29 @@ namespace ParkingLotManagement
 {
     public class ParkingLot
     {
-        private Dictionary<string, string> ticket2Car = new Dictionary<string, string>();
+        private Dictionary<Ticket, string> ticket2Car = new Dictionary<Ticket, string>();
 
-        public string Fetch(string ticket)
+        public string Fetch(Ticket ticket)
         {
-            return ticket2Car.ContainsKey(ticket) ? ticket2Car[ticket] : string.Empty;
+            if (ticket == null)
+            {
+                return string.Empty;
+            }
+
+            if (ticket.IsValid == true)
+            {
+                ticket.IsValid = false;
+                return ticket2Car.ContainsKey(ticket) ? ticket2Car[ticket] : string.Empty;
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
 
-        public string Park(string carName)
+        public Ticket Park(string carName)
         {
-            string ticket = $"Ticket-{carName}";
+            Ticket ticket = new Ticket(carName);
             ticket2Car[ticket] = carName;
             return ticket;
         }
