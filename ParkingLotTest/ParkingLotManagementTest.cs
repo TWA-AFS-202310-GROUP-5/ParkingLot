@@ -47,7 +47,7 @@ namespace ParkingLotManagementTest
         {
             ParkingLot parkingLot = new ParkingLot();
             Ticket ticketCorrect = parkingLot.Park(carNameCorrect);
-            Ticket ticketFalse = new Ticket(carNameFalse);
+            Ticket ticketFalse = new Ticket(carNameFalse, parkingLot.Name);
 
             Action action = () => parkingLot.Fetch(ticketFalse);
 
@@ -142,7 +142,7 @@ namespace ParkingLotManagementTest
             ParkingBoy parkingBoy = new ParkingBoy();
             parkingBoy.AddParkingLot(parkingLot);
             Ticket ticketCorrect = parkingBoy.Park(carNameCorrect);
-            Ticket ticketFalse = new Ticket(carNameFalse);
+            Ticket ticketFalse = new Ticket(carNameFalse, parkingLot.Name);
 
             Action action = () => parkingBoy.Fetch(ticketFalse);
 
@@ -184,10 +184,10 @@ namespace ParkingLotManagementTest
         }
 
         [Theory]
-        [InlineData("Car", 10)]
-        public void Should_parking_boy_return_no_ticket_when_parking_lot_has_no_position_left(string carName, int capacity)
+        [InlineData("Car", "Parking Lot AAA", 10)]
+        public void Should_parking_boy_return_no_ticket_when_parking_lot_has_no_position_left(string carName, string parkingLotName,  int capacity)
         {
-            ParkingLot parkingLot = new ParkingLot();
+            ParkingLot parkingLot = new ParkingLot(parkingLotName);
             ParkingBoy parkingBoy = new ParkingBoy();
             parkingBoy.AddParkingLot(parkingLot);
             for (var i = 0; i < capacity; i++)
