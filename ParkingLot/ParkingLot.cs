@@ -13,7 +13,7 @@ namespace ParkingLotManage
         {
             if (!ticket2Car.ContainsKey(ticket))
             {
-                return null;
+                throw new WrongTicketException("Unrecognized parking ticket.");
             }
 
             string car = ticket2Car[ticket];

@@ -54,10 +54,11 @@ namespace ParkingLotTest
             //given
             ParkingLot parkingLot = new ParkingLot();
             string ticket = "T-car3";
+            string errMsg = "Unrecognized parking ticket.";
             //when
-            var exception = Assert.Throws<WrongTicketException>(() => parkingLot.Fetch(ticket));
+            var wrongTicketException = Assert.Throws<WrongTicketException>(() => parkingLot.Fetch(ticket));
             //then
-            Assert.Equal("Unrecognized parking ticket.", exception.Message);
+            Assert.Equal(errMsg, wrongTicketException.Message);
         }
 
         [Fact]
