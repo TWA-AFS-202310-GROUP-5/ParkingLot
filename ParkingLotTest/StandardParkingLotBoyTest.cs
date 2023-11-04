@@ -151,5 +151,22 @@ namespace ParkingLotTest
             //then
             Assert.Equal(parkingLot2.ParkingLotId, ticket2.ParkingLotId);
         }
+
+        [Fact]
+        public void Should_return_nothing_with_error_message_unrecognized_parking_ticket_when_fetch_the_car_given_a_standard_parking_boy_who_manage_two_parking_lots_and_an_unrecognized_ticket()
+        {
+            //given
+            ParkingLot parkingLot1 = new ParkingLot(1);
+            ParkingLot parkingLot2 = new ParkingLot(1);
+            StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(new ParkingLot[] { parkingLot1, parkingLot2 });
+            Car car1 = new Car();
+            standardParkinglotBoy.Park(car1);
+            Ticket unrecognizedTicket = new Ticket();
+            string errMsg = "Unrecognized parking ticket.";
+            //when
+            var exception = Assert.Throws<WrongTicketException>(() => standardParkinglotBoy.Fetch(unrecognizedTicket));
+            //then
+            Assert.Equal(errMsg, exception.Message);
+        }
     }
 }
