@@ -14,9 +14,9 @@ namespace ParkingLotManage
             this.parkingLot = parkingLot;
         }
 
-        public string Park(string v)
+        public string Park(string car)
         {
-            throw new NotImplementedException();
+            return parkingLot.Park(car);
         }
     }
 }

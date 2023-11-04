@@ -21,6 +21,5 @@ namespace ParkingLotTest
             //then
             Assert.Equal("T-car", ticket);
         }
-
     }
 }
