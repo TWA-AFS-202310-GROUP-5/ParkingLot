@@ -15,7 +15,7 @@ namespace ParkingLotTest
         {
             var car = "car";
 
-            var parkingBoy = new ParkingBoy();
+            var parkingBoy = new StandardParkingBoy();
             var ticket = parkingBoy.Park(car);
             var result = parkingBoy.Fetch(ticket);
 
@@ -25,7 +25,7 @@ namespace ParkingLotTest
         [Fact]
         public void should_return_parked_car_when_fetch_given_ticket()
         {
-            var parkingBoy = new ParkingBoy();
+            var parkingBoy = new StandardParkingBoy();
             var ticket1 = parkingBoy.Park("car1");
 
             var car1 = parkingBoy.Fetch(ticket1);
@@ -36,7 +36,7 @@ namespace ParkingLotTest
         [Fact]
         public void should_return_two_parked_car_when_fetch_given_two_ticket()
         {
-            var parkingBoy = new ParkingBoy();
+            var parkingBoy = new StandardParkingBoy();
             var ticket1 = parkingBoy.Park("car1");
             var ticket2 = parkingBoy.Park("car2");
 
@@ -50,7 +50,7 @@ namespace ParkingLotTest
         [Fact]
         public void Should_throw_exception_when_fetch_given_wrong_ticket()
         {
-            var parkingBoy = new ParkingBoy();
+            var parkingBoy = new StandardParkingBoy();
             var ticket1 = parkingBoy.Park("car1");
             var ticket2 = parkingBoy.Park("car2");
 
@@ -61,7 +61,7 @@ namespace ParkingLotTest
         [Fact]
         public void Should_throw_exception_when_fetch_given_used_ticket()
         {
-            var parkingBoy = new ParkingBoy();
+            var parkingBoy = new StandardParkingBoy();
             var ticket = parkingBoy.Park("car1");
 
             var car = parkingBoy.Fetch(ticket);
@@ -73,7 +73,7 @@ namespace ParkingLotTest
         [Fact]
         public void Should_throw_exception_when_park_given_parking_is_full()
         {
-            var parkingBoy = new ParkingBoy();
+            var parkingBoy = new StandardParkingBoy();
             for (int i = 0; i < 20; i++)
             {
                 parkingBoy.Park($"car{i}");

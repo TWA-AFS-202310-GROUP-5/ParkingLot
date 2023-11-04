@@ -24,7 +24,7 @@ namespace ParkingLot
             };
         }
 
-        public string Park(string car)
+        public string Park(string car, bool isSmart=false)
         {
             if (ticket2car[0].Count >= capacity && ticket2car[1].Count >= capacity)
             {
@@ -32,7 +32,7 @@ namespace ParkingLot
             }
 
             string ticket;
-            if (ticket2car[0].Count < 10)
+            if (ticket2car[0].Count < 10 && !isSmart || ticket2car[0].Count <= ticket2car[1].Count)
             {
                 ticket =  "ParkingLot1-" + car;
                 ticket2car[0].Add(ticket, car);

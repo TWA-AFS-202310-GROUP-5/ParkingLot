@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace ParkingLot
 {
-    public class ParkingBoy
+    public class SmartParkingBoy
     {
         public Parking ParkingLot { get; set; }
 
-        public ParkingBoy()
+        public SmartParkingBoy()
         {
             ParkingLot = new Parking();
         }
 
         public string Park(string car)
         {
-            return ParkingLot.Park(car);
+            return ParkingLot.Park(car,true);
         }
 
         public string Fetch(string car)
