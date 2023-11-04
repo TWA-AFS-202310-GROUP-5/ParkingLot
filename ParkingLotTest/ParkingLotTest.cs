@@ -72,5 +72,26 @@ namespace ParkingLotTest
             //then
             Assert.Null(car);
         }
+
+        [Fact]
+        public void Should_return_nothing_when_park_the_car_given_a_parking_lot_without_any_position_and_a_car()
+        {
+            //given
+            ParkingLot parkingLot = new ParkingLot();
+            parkingLot.Park("car1");
+            parkingLot.Park("car2");
+            parkingLot.Park("car3");
+            parkingLot.Park("car4");
+            parkingLot.Park("car5");
+            parkingLot.Park("car6");
+            parkingLot.Park("car7");
+            parkingLot.Park("car8");
+            parkingLot.Park("car9");
+            parkingLot.Park("car10");
+            //when
+            string ticket11 = parkingLot.Park("car11");
+            //then
+            Assert.Null(ticket11);
+        }
     }
 }
