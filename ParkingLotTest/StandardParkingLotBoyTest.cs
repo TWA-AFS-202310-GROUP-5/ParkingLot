@@ -84,5 +84,20 @@ namespace ParkingLotTest
             //then
             Assert.Equal(errMsg, exception.Message);
         }
+
+        [Fact]
+        public void Should_return_nothing_with_error_message_no_available_position_when_park_the_car_given_a_parking_lot_without_any_position_a_standard_parking_boy_and_a_car()
+        {
+            //given
+            ParkingLot parkingLot = new ParkingLot(2);
+            StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(parkingLot);
+            standardParkinglotBoy.Park("car1");
+            standardParkinglotBoy.Park("car2");
+            string errMsg = "No available position.";
+            //when
+            var exception = Assert.Throws<NoPositionException>(() => standardParkinglotBoy.Park("car3"));
+            //then
+            Assert.Equal(errMsg, exception.Message);
+        }
     }
 }

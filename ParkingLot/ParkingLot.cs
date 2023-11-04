@@ -8,7 +8,18 @@ namespace ParkingLotManage
 {
     public class ParkingLot
     {
-        private Dictionary<string, string> ticket2Car = new Dictionary<string, string>(10);
+        private Dictionary<string, string> ticket2Car = new Dictionary<string, string>();
+        private int capacity = 10;
+
+        public ParkingLot()
+        {
+        }
+
+        public ParkingLot(int capacity)
+        {
+            this.capacity = capacity;
+        }
+
         public string Fetch(string ticket)
         {
             if (!ticket2Car.ContainsKey(ticket))
@@ -23,7 +34,7 @@ namespace ParkingLotManage
 
         public string Park(string car)
         {
-            if (ticket2Car.Count >= 10)
+            if (ticket2Car.Count >= capacity)
             {
                 throw new NoPositionException("No available position.");
             }
