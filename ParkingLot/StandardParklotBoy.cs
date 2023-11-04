@@ -9,15 +9,18 @@ namespace ParkingLotManage
     public class StandardParklotBoy
     {
         protected List<ParkingLot> parkingLots = new List<ParkingLot>();
+        protected ISearchStrategy _searchStrategy;
 
-        public StandardParklotBoy(ParkingLot parkingLot)
+        public StandardParklotBoy(ParkingLot parkingLot, ISearchStrategy searchStrategy)
         {
             this.parkingLots.Add(parkingLot);
+            this._searchStrategy = searchStrategy;
         }
 
-        public StandardParklotBoy(ParkingLot[] parkingLots)
+        public StandardParklotBoy(ParkingLot[] parkingLots, ISearchStrategy searchStrategy)
         {
             this.parkingLots.AddRange(parkingLots);
+            this._searchStrategy = searchStrategy;
         }
 
         public virtual Car Fetch(Ticket ticket)
@@ -36,7 +39,7 @@ namespace ParkingLotManage
         {
             try
             {
-                return parkingLots.Find(x => !x.IsFull).Park(car);
+                return _searchStrategy.SearchParkingLot(parkingLots).Park(car);
             }
             catch (Exception)
             {

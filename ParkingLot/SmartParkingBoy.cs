@@ -8,11 +8,13 @@ namespace ParkingLotManage
 {
     public class SmartParkingBoy : StandardParklotBoy
     {
-        public SmartParkingBoy(ParkingLot parkingLot) : base(parkingLot)
+          
+        public SmartParkingBoy(ParkingLot parkingLot, ISearchStrategy searchStrategy) : base(parkingLot, searchStrategy)
         {
+            
         }
 
-        public SmartParkingBoy(ParkingLot[] parkingLots) : base(parkingLots)
+        public SmartParkingBoy(ParkingLot[] parkingLots,ISearchStrategy searchStrategy) : base(parkingLots, searchStrategy)
         {
         }
 
@@ -20,7 +22,7 @@ namespace ParkingLotManage
         {
             try
             {
-                return parkingLots.OrderByDescending(x => x.EmptyNum).First().Park(car);
+                return _searchStrategy.SearchParkingLot(parkingLots).Park(car);
             }catch (Exception)
             {
                 throw new NoPositionException("No available position.");

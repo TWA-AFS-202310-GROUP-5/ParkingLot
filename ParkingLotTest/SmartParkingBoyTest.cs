@@ -16,7 +16,7 @@ namespace ParkingLotTest
             //given
             ParkingLot parkingLot1 = new ParkingLot(2);
             ParkingLot parkingLot2 = new ParkingLot(2);
-            SmartParkingBoy smartParkingBoy = new SmartParkingBoy(new ParkingLot[] {parkingLot1, parkingLot2});
+            SmartParkingBoy smartParkingBoy = new SmartParkingBoy(new ParkingLot[] {parkingLot1, parkingLot2}, new SmartSearchStrategy());
             Car car1 = new Car();
             Car car2 = new Car();
             smartParkingBoy.Park(car1);
@@ -32,7 +32,7 @@ namespace ParkingLotTest
             //given
             ParkingLot parkingLot1 = new ParkingLot(2);
             ParkingLot parkingLot2 = new ParkingLot(2);
-            SmartParkingBoy smartParkingBoy = new SmartParkingBoy(new ParkingLot[] { parkingLot1, parkingLot2 });
+            SmartParkingBoy smartParkingBoy = new SmartParkingBoy(new ParkingLot[] { parkingLot1, parkingLot2 }, new SmartSearchStrategy());
             Car car1 = new Car();
             Car car2 = new Car();
             Ticket ticket1 = smartParkingBoy.Park(car1);
@@ -52,7 +52,7 @@ namespace ParkingLotTest
             string errMsg = "Unrecognized parking ticket.";
             ParkingLot parkingLot1 = new ParkingLot(2);
             ParkingLot parkingLot2 = new ParkingLot(2);
-            SmartParkingBoy smartParkingBoy = new SmartParkingBoy(new ParkingLot[] { parkingLot1, parkingLot2 });
+            SmartParkingBoy smartParkingBoy = new SmartParkingBoy(new ParkingLot[] { parkingLot1, parkingLot2 }, new SmartSearchStrategy());
             smartParkingBoy.Park(new Car());
             Ticket unrecognizedTicket = new Ticket();
             //when
@@ -68,7 +68,7 @@ namespace ParkingLotTest
             string errMsg = "Unrecognized parking ticket.";
             ParkingLot parkingLot1 = new ParkingLot(2);
             ParkingLot parkingLot2 = new ParkingLot(2);
-            SmartParkingBoy smartParkingBoy = new SmartParkingBoy(new ParkingLot[] { parkingLot1, parkingLot2 });
+            SmartParkingBoy smartParkingBoy = new SmartParkingBoy(new ParkingLot[] { parkingLot1, parkingLot2 }, new SmartSearchStrategy());
             Ticket ticket = smartParkingBoy.Park(new Car());
             smartParkingBoy.Fetch(ticket);
             // when
@@ -84,7 +84,7 @@ namespace ParkingLotTest
             string errMsg = "No available position.";
             ParkingLot parkingLot1 = new ParkingLot(1);
             ParkingLot parkingLot2 = new ParkingLot(2);
-            SmartParkingBoy smartParkingBoy = new SmartParkingBoy(new ParkingLot[] { parkingLot1, parkingLot2 });
+            SmartParkingBoy smartParkingBoy = new SmartParkingBoy(new ParkingLot[] { parkingLot1, parkingLot2 }, new SmartSearchStrategy());
             smartParkingBoy.Park(new Car());
             smartParkingBoy.Park(new Car());
             smartParkingBoy.Park(new Car());
