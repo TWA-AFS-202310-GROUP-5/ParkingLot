@@ -11,6 +11,7 @@ namespace ParkingLotManage
         private Dictionary<string, Car> ticket2Car = new Dictionary<string, Car>();
         private int capacity = 10;
         public string ParkingLotId { get; }
+        
         public bool IsFull => ticket2Car.Count >= capacity;
 
         public ParkingLot()
@@ -20,6 +21,7 @@ namespace ParkingLotManage
 
         public ParkingLot(int capacity)
         {
+            ParkingLotId = Guid.NewGuid().ToString();
             this.capacity = capacity;
         }
 
@@ -32,6 +34,7 @@ namespace ParkingLotManage
 
             Car car = ticket2Car[ticket.TicketId];
             ticket2Car.Remove(ticket.TicketId);
+            
             return car;
         }
 
@@ -44,6 +47,7 @@ namespace ParkingLotManage
 
             Ticket ticket = new Ticket(ParkingLotId, car.ID);
             ticket2Car.Add(ticket.TicketId, car);
+        
             return ticket;
         }
     }
