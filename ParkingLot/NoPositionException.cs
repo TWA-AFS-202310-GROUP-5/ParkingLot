@@ -7,16 +7,14 @@ using System.Threading.Tasks;
 namespace ParkingLotManage
 {
     [Serializable]
-    public class WrongTicketException : Exception
+    public class NoPositionException : Exception
     {
-        public WrongTicketException()
+        public NoPositionException()
         {
         }
 
-        public WrongTicketException(string message) : base(message)
+        public NoPositionException(string message) : base(message)
         {
         }
     }
-
-    
 }
