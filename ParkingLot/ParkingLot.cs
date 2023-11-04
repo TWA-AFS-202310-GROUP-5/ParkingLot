@@ -8,7 +8,7 @@ namespace ParkingLotManage
 {
     public class ParkingLot
     {
-        private Dictionary<string, string> ticket2Car = new Dictionary<string, string>();
+        private Dictionary<string, string> ticket2Car = new Dictionary<string, string>(10);
         public string Fetch(string ticket)
         {
             if (!ticket2Car.ContainsKey(ticket))
@@ -23,6 +23,11 @@ namespace ParkingLotManage
 
         public string Park(string car)
         {
+            if (ticket2Car.Count >= 10)
+            {
+                return null;
+            }
+
             string ticket = "T-" + car;
             ticket2Car.Add(ticket, car);
             return ticket;
