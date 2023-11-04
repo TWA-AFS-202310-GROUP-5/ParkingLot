@@ -15,10 +15,11 @@ namespace ParkingLotTest
         {
             //given
             ParkingLot parkingLot = new ParkingLot();
+            Car car = new Car();
             //when
-            string ticket = parkingLot.Park("car");
+            Ticket ticket = parkingLot.Park(car);
             //then
-            Assert.Equal("T-car", ticket);
+            Assert.Equal(car.ID, ticket.CarId);
         }
 
         [Fact]
@@ -26,11 +27,12 @@ namespace ParkingLotTest
         {
             //given
             ParkingLot parkingLot = new ParkingLot();
-            string ticket = parkingLot.Park("car");
+            Car car = new Car();
+            Ticket ticket = parkingLot.Park(car);
             //when
-            string car = parkingLot.Fetch(ticket);
+            Car fetchedCar = parkingLot.Fetch(ticket);
             //then
-            Assert.Equal("car", car);
+            Assert.Equal(car.ID, fetchedCar.ID);
         }
 
         [Fact]
@@ -38,14 +40,16 @@ namespace ParkingLotTest
         {
             // given
             ParkingLot parkingLot = new ParkingLot();
-            string ticket1 = parkingLot.Park("car1");
-            string ticket2 = parkingLot.Park("car2");
+            Car car1 = new Car();
+            Car car2 = new Car();
+            Ticket ticket1 = parkingLot.Park(car1);
+            Ticket ticket2 = parkingLot.Park(car2);
             //when
-            string car1 = parkingLot.Fetch(ticket1);
-            string car2 = parkingLot.Fetch(ticket2);
+            Car fetchedCar1 = parkingLot.Fetch(ticket1);
+            Car fetchedCar2 = parkingLot.Fetch(ticket2);
             //then
-            Assert.Equal("car1", car1);
-            Assert.Equal("car2", car2);
+            Assert.Equal(car1.ID, fetchedCar1.ID);
+            Assert.Equal(car2.ID, fetchedCar2.ID);
         }
 
         [Fact]
@@ -53,7 +57,7 @@ namespace ParkingLotTest
         {
             //given
             ParkingLot parkingLot = new ParkingLot();
-            string ticket = "T-car3";
+            Ticket ticket = new Ticket();
             string errMsg = "Unrecognized parking ticket.";
             //when
             var wrongTicketException = Assert.Throws<WrongTicketException>(() => parkingLot.Fetch(ticket));
@@ -66,7 +70,8 @@ namespace ParkingLotTest
         {
             //given
             ParkingLot parkingLot = new ParkingLot();
-            string ticket = parkingLot.Park("car");
+            Car car = new Car();
+            Ticket ticket = parkingLot.Park(car);
             parkingLot.Fetch(ticket);
             string errMsg = "Unrecognized parking ticket.";
             //when
@@ -79,20 +84,12 @@ namespace ParkingLotTest
         public void Should_return_nothing_with_error_message_no_available_position_when_park_the_car_given_a_parking_lot_without_any_position_and_a_car()
         {
             //given
-            ParkingLot parkingLot = new ParkingLot();
-            parkingLot.Park("car1");
-            parkingLot.Park("car2");
-            parkingLot.Park("car3");
-            parkingLot.Park("car4");
-            parkingLot.Park("car5");
-            parkingLot.Park("car6");
-            parkingLot.Park("car7");
-            parkingLot.Park("car8");
-            parkingLot.Park("car9");
-            parkingLot.Park("car10");
+            ParkingLot parkingLot = new ParkingLot(1);
+            Car car = new Car();
+            parkingLot.Park(car);
             string errMsg = "No available position.";
             //when
-            var exception = Assert.Throws<NoPositionException>(() => parkingLot.Park("car11"));
+            var exception = Assert.Throws<NoPositionException>(() => parkingLot.Park(new Car()));
             //then
             Assert.Equal(errMsg, exception.Message);
         }

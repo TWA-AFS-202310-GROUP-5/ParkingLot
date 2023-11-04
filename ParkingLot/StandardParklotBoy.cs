@@ -9,17 +9,24 @@ namespace ParkingLotManage
     public class StandardParklotBoy
     {
         private ParkingLot parkingLot;
+        private ParkingLot[] parkingLots;
+
         public StandardParklotBoy(ParkingLot parkingLot)
         {
             this.parkingLot = parkingLot;
         }
 
-        public string Fetch(string ticket)
+        public StandardParklotBoy(ParkingLot[] parkingLots)
+        {
+            this.parkingLots = parkingLots;
+        }
+
+        public Car Fetch(Ticket ticket)
         {
             return parkingLot.Fetch(ticket);
         }
 
-        public string Park(string car)
+        public Ticket Park(Car car)
         {
             return parkingLot.Park(car);
         }

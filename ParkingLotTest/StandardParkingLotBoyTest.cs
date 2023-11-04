@@ -16,11 +16,11 @@ namespace ParkingLotTest
             // given
             ParkingLot parkingLot = new ParkingLot();
             StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(parkingLot);
-            string car = "car";
+            Car car = new Car();
             //when
-            string ticket = standardParkinglotBoy.Park(car);
+            Ticket ticket = standardParkinglotBoy.Park(car);
             //then
-            Assert.Equal("T-car", ticket);
+            Assert.Equal(car.ID, ticket.CarId);
         }
 
         [Fact]
@@ -29,12 +29,12 @@ namespace ParkingLotTest
             // given
             ParkingLot parkingLot = new ParkingLot();
             StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(parkingLot);
-            string car = "car";
-            string ticket = standardParkinglotBoy.Park(car);
+            Car car = new Car();
+            Ticket ticket = standardParkinglotBoy.Park(car);
             // when
-            string fetchedCar = standardParkinglotBoy.Fetch(ticket);
+            Car fetchedCar = standardParkinglotBoy.Fetch(ticket);
             // then
-            Assert.Equal(car, fetchedCar);
+            Assert.Equal(car.ID, fetchedCar.ID);
         }
 
         [Fact]
@@ -43,16 +43,16 @@ namespace ParkingLotTest
             // given
             ParkingLot parkingLot = new ParkingLot();
             StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(parkingLot);
-            string car1 = "car1";
-            string car2 = "car2";
-            string ticket1 = standardParkinglotBoy.Park(car1);
-            string ticket2 = standardParkinglotBoy.Park(car2);
+            Car car1 = new Car();
+            Car car2 = new Car();
+            Ticket ticket1 = standardParkinglotBoy.Park(car1);
+            Ticket ticket2 = standardParkinglotBoy.Park(car2);
             //when
-            string fetchedCar1 = standardParkinglotBoy.Fetch(ticket1);
-            string fetchedCar2 = standardParkinglotBoy.Fetch(ticket2);
+            Car fetchedCar1 = standardParkinglotBoy.Fetch(ticket1);
+            Car fetchedCar2 = standardParkinglotBoy.Fetch(ticket2);
             //then
-            Assert.Equal(car1, fetchedCar1);
-            Assert.Equal(car2, fetchedCar2);
+            Assert.Equal(car1.ID, fetchedCar1.ID);
+            Assert.Equal(car2.ID, fetchedCar2.ID);
         }
 
         [Fact]
@@ -61,7 +61,7 @@ namespace ParkingLotTest
             //given
             ParkingLot parkingLot = new ParkingLot();
             StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(parkingLot);
-            string ticket = "T-car3";
+            Ticket ticket = new Ticket();
             string errMsg = "Unrecognized parking ticket.";
             //when
             var exception = Assert.Throws<WrongTicketException>(() => standardParkinglotBoy.Fetch(ticket));
@@ -75,8 +75,8 @@ namespace ParkingLotTest
             //given
             ParkingLot parkingLot = new ParkingLot();
             StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(parkingLot);
-            string car = "car";
-            string ticket = standardParkinglotBoy.Park(car);
+            Car car = new Car();
+            Ticket ticket = standardParkinglotBoy.Park(car);
             standardParkinglotBoy.Fetch(ticket);
             string errMsg = "Unrecognized parking ticket.";
             //when
@@ -91,13 +91,28 @@ namespace ParkingLotTest
             //given
             ParkingLot parkingLot = new ParkingLot(2);
             StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(parkingLot);
-            standardParkinglotBoy.Park("car1");
-            standardParkinglotBoy.Park("car2");
+            standardParkinglotBoy.Park(new Car());
+            standardParkinglotBoy.Park(new Car());
             string errMsg = "No available position.";
             //when
-            var exception = Assert.Throws<NoPositionException>(() => standardParkinglotBoy.Park("car3"));
+            var exception = Assert.Throws<NoPositionException>(() => standardParkinglotBoy.Park(new Car()));
             //then
             Assert.Equal(errMsg, exception.Message);
         }
+
+        /*
+         * standard parking lot boy manage multi parking lots
+         */
+        //[Fact]
+        //public void Should_car_be_parked_to_first_parking_lot_when_park_the_car_given_a_standard_parking_boy_manage_two_parking_lots_both_with_available_position_and_a_car()
+        //{
+        //    //given
+        //    ParkingLot parkingLot1 = new ParkingLot(1);
+        //    ParkingLot parkingLot2 = new ParkingLot(1);
+        //    StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(new ParkingLot[] { parkingLot1, parkingLot2});
+        //    string car = "car";
+        //    //when
+        //    Ticket ticket = standardParkinglotBoy.Park(car);
+        //}
     }
 }
