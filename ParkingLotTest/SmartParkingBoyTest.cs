@@ -11,7 +11,7 @@ namespace ParkingLotTest
     public class SmartParkingBoyTest
     {
         [Fact]
-        public void Should_car_be_parked_to_parking_lot_contains_more_positions_when_park_the_car_given_a_standard_parking_boy_manage_two_parking_lots_both_with_available_position_and_a_car()
+        public void Should_car_be_parked_to_parking_lot_contains_more_positions_when_park_the_car_given_a_smart_parking_boy_manage_two_parking_lots_both_with_available_position_and_a_car()
         {
             //given
             ParkingLot parkingLot1 = new ParkingLot(2);
@@ -25,5 +25,7 @@ namespace ParkingLotTest
             //then
             Assert.Equal(parkingLot2.ParkingLotId, ticket.ParkingLotId);
         }
+
+        
     }
 }

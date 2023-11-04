@@ -15,5 +15,11 @@ namespace ParkingLotManage
         public SmartParkingBoy(ParkingLot[] parkingLots) : base(parkingLots)
         {
         }
+
+        public override Ticket Park(Car car)
+        {
+           return parkingLots.OrderByDescending(x => x.EmptyNum).First().Park(car);
+        }
+
     }
 }

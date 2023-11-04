@@ -13,6 +13,7 @@ namespace ParkingLotManage
         public string ParkingLotId { get; }
         
         public bool IsFull => ticket2Car.Count >= capacity;
+        public int EmptyNum => capacity - ticket2Car.Count;
 
         public ParkingLot()
         {

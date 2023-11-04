@@ -8,7 +8,7 @@ namespace ParkingLotManage
 {
     public class StandardParklotBoy
     {
-        private List<ParkingLot> parkingLots = new List<ParkingLot>();
+        protected List<ParkingLot> parkingLots = new List<ParkingLot>();
 
         public StandardParklotBoy(ParkingLot parkingLot)
         {
@@ -20,10 +20,10 @@ namespace ParkingLotManage
             this.parkingLots.AddRange(parkingLots);
         }
 
-        public Car Fetch(Ticket ticket)
+        public virtual Car Fetch(Ticket ticket)
         {
             try
-            {
+            {                
                 return parkingLots.Find(x => x.ParkingLotId == ticket.ParkingLotId).Fetch(ticket);
             }
             catch (Exception)
@@ -32,7 +32,7 @@ namespace ParkingLotManage
             }
         }
 
-        public Ticket Park(Car car)
+        public virtual Ticket Park(Car car)
         {
             try
             {
