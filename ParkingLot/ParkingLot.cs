@@ -25,7 +25,7 @@ namespace ParkingLotManage
         {
             if (ticket2Car.Count >= 10)
             {
-                return null;
+                throw new NoPositionException("No available position.");
             }
 
             string ticket = "T-" + car;
