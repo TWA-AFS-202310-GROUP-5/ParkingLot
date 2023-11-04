@@ -135,5 +135,21 @@ namespace ParkingLotTest
             Assert.Equal(car1.ID, fetchedCar1.ID);
             Assert.Equal(car2.ID, fetchedCar2.ID);
         }
+
+        [Fact]
+        public void Should_the_car_be_parked_to_second_parking_lot_when_park_the_car_given_a_standard_parking_boy_who_manage_two_parking_lots_first_is_full_and_second_with_available_position_and_a_car()
+        {
+            //given
+            ParkingLot parkingLot1 = new ParkingLot(1);
+            ParkingLot parkingLot2 = new ParkingLot(1);
+            StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(new ParkingLot[] { parkingLot1, parkingLot2 });
+            Car car1 = new Car();
+            Car car2 = new Car();
+            standardParkinglotBoy.Park(car1);
+            //when
+            Ticket ticket2 = standardParkinglotBoy.Park(car2);
+            //then
+            Assert.Equal(parkingLot2.ParkingLotId, ticket2.ParkingLotId);
+        }
     }
 }
