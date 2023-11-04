@@ -8,9 +8,9 @@ namespace ParkingLotManage
 {
     public class ParkingLot
     {
-        public string Park(string v)
+        public string Park(string car)
         {
-            throw new NotImplementedException();
+            return "T-" + car;
         }
     }
 }
