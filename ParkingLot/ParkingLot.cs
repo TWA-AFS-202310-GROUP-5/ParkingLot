@@ -7,7 +7,6 @@
     public class ParkingLot
     {
         private readonly int capacity = 10;
-        private string car;
 
         private Dictionary<string, string> ticket2carParking = new Dictionary<string, string>();
 
@@ -17,9 +16,8 @@
         {
         }
 
-        public int NumOfParkedCars { get => ticket2carParking.Count; }
         public int Capacity { get => capacity; }
-        public int NumOfEmptyPosition { get => Capacity - NumOfParkedCars; }
+        public int NumOfEmptyPosition { get => Capacity - ticket2carParking.Count; }
 
         public Dictionary<string, string> Ticket2carParking
         {

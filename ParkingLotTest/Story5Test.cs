@@ -8,20 +8,20 @@
 
     public class Story5Test
     {
-        [Fact] 
+        [Fact]
         public void Should_park_a_car_to_first_parkinglot_when_park_a_car_given_two_empty_parkinglots()
         {
             List<ParkingLot> parkingLots = new List<ParkingLot> { new ParkingLot(), new ParkingLot() };
-            SmartardParkingBoy smartParkingBoy = new SmartardParkingBoy(parkingLots);
+            SmartParkingBoyStrategy smartParkingBoy = new SmartParkingBoyStrategy(parkingLots);
             string car = "parkthiscar";
 
             string ticket = smartParkingBoy.Park(car);
-            int indexOfParkedlot = smartParkingBoy.ReturnIndexOfCarParkedLotOrZero(ticket);
+            int indexOfParkedlot = smartParkingBoy.ReturnIndexOfCarParkedLotOrDefaultZero(ticket);
 
             Assert.Equal(0, indexOfParkedlot);
         }
 
-        [Fact] 
+        [Fact]
         public void Should_park_a_car_to_second_parkinglot_when_park_a_car_given_first_lot_parked_1car_with_second_lot_empty()
         {
             ParkingLot parkingLot1 = new ParkingLot();
@@ -29,11 +29,11 @@
             string ticket1 = parkingLot1.Park(car1);
 
             List<ParkingLot> parkingLots = new List<ParkingLot> { parkingLot1, new ParkingLot() };
-            SmartardParkingBoy smartParkingBoy = new SmartardParkingBoy(parkingLots);
+            SmartParkingBoyStrategy smartParkingBoy = new SmartParkingBoyStrategy(parkingLots);
             string car = "parkthiscar";
 
             string ticket = smartParkingBoy.Park(car);
-            int indexOfParkedlot = smartParkingBoy.ReturnIndexOfCarParkedLotOrZero(ticket);
+            int indexOfParkedlot = smartParkingBoy.ReturnIndexOfCarParkedLotOrDefaultZero(ticket);
 
             Assert.Equal(1, indexOfParkedlot);
         }
@@ -46,11 +46,11 @@
             string ticket1 = parkingLot2.Park(car1);
 
             List<ParkingLot> parkingLots = new List<ParkingLot> { new ParkingLot(), parkingLot2 };
-            SmartardParkingBoy smartParkingBoy = new SmartardParkingBoy(parkingLots);
+            SmartParkingBoyStrategy smartParkingBoy = new SmartParkingBoyStrategy(parkingLots);
             string car = "parkthiscar";
 
             string ticket = smartParkingBoy.Park(car);
-            int indexOfParkedlot = smartParkingBoy.ReturnIndexOfCarParkedLotOrZero(ticket);
+            int indexOfParkedlot = smartParkingBoy.ReturnIndexOfCarParkedLotOrDefaultZero(ticket);
 
             Assert.Equal(0, indexOfParkedlot);
         }
@@ -65,7 +65,7 @@
             string ticket1 = parkingLot1.Park(car1);
             string ticket2 = parkingLot2.Park(car2);
             List<ParkingLot> parkingLots = new List<ParkingLot> { parkingLot1, parkingLot2 };
-            SmartardParkingBoy smartParkingBoy = new SmartardParkingBoy(parkingLots);
+            SmartParkingBoyStrategy smartParkingBoy = new SmartParkingBoyStrategy(parkingLots);
 
             string fetchCar1 = smartParkingBoy.Fetch(ticket1);
             string fetchCar2 = smartParkingBoy.Fetch(ticket2);
@@ -78,7 +78,7 @@
         public void Should_return_nothing_with_error_msg_when_fetch_car_given_unrecognized_ticket_in_two_lots()
         {
             List<ParkingLot> parkingLots = new List<ParkingLot> { new ParkingLot(), new ParkingLot() };
-            SmartardParkingBoy smartParkingBoy = new SmartardParkingBoy(parkingLots);
+            SmartParkingBoyStrategy smartParkingBoy = new SmartParkingBoyStrategy(parkingLots);
             string unrecognizedTicket = "errorT";
 
             WrongTicketException wrongTicketException = Assert.Throws<WrongTicketException>(() => smartParkingBoy.Fetch(unrecognizedTicket));
@@ -89,7 +89,7 @@
         public void Should_return_nothing_with_error_msg_when_fetch_car_given_used_ticket_in_two_lots()
         {
             List<ParkingLot> parkingLots = new List<ParkingLot> { new ParkingLot(), new ParkingLot() };
-            SmartardParkingBoy smartParkingBoy = new SmartardParkingBoy(parkingLots);
+            SmartParkingBoyStrategy smartParkingBoy = new SmartParkingBoyStrategy(parkingLots);
             string car = "Car";
             string carTicket = smartParkingBoy.Park(car);
             string fetchCar = smartParkingBoy.Fetch(carTicket);
@@ -103,7 +103,7 @@
         public void Should_return_nothing_with_error_msg_when_park_car_with_no_position_in_two_lots()
         {
             List<ParkingLot> parkingLots = new List<ParkingLot> { new ParkingLot(), new ParkingLot() };
-            SmartardParkingBoy smartParkingBoy = new SmartardParkingBoy(parkingLots);
+            SmartParkingBoyStrategy smartParkingBoy = new SmartParkingBoyStrategy(parkingLots);
             int numOfCars = 10 * 2;
             List<string> cars = Enumerable.Range(1, numOfCars)
                 .Select(i => i.ToString())
