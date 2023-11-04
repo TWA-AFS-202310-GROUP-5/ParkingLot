@@ -18,7 +18,14 @@ namespace ParkingLotManage
 
         public override Ticket Park(Car car)
         {
-           return parkingLots.OrderByDescending(x => x.EmptyNum).First().Park(car);
+            try
+            {
+                return parkingLots.OrderByDescending(x => x.EmptyNum).First().Park(car);
+            }catch (Exception)
+            {
+                throw new NoPositionException("No available position.");
+            }
+           
         }
 
     }
