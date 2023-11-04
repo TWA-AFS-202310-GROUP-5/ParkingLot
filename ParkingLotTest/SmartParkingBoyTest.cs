@@ -26,6 +26,23 @@ namespace ParkingLotTest
             Assert.Equal(parkingLot2.ParkingLotId, ticket.ParkingLotId);
         }
 
-        
+        [Fact]
+        public void Should_return_right_car_with_each_ticket_when_fetch_the_car_twice_given_a_smart_parking_boy_manage_two_parking_lots_both_with_a_parked_car_and_two_parking_ticket()
+        {
+            //given
+            ParkingLot parkingLot1 = new ParkingLot(2);
+            ParkingLot parkingLot2 = new ParkingLot(2);
+            SmartParkingBoy smartParkingBoy = new SmartParkingBoy(new ParkingLot[] { parkingLot1, parkingLot2 });
+            Car car1 = new Car();
+            Car car2 = new Car();
+            Ticket ticket1 = smartParkingBoy.Park(car1);
+            Ticket ticket2 = smartParkingBoy.Park(car2);
+            //when
+            Car fetchedCar1 = smartParkingBoy.Fetch(ticket1);
+            Car fetchedCar2 = smartParkingBoy.Fetch(ticket2);
+            //then
+            Assert.Equal(car1.ID, fetchedCar1.ID);
+            Assert.Equal(car2.ID, fetchedCar2.ID);
+        }
     }
 }
