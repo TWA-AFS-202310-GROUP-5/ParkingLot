@@ -16,7 +16,7 @@ namespace ParkingLotManage
 
         public string Fetch(string ticket)
         {
-            throw new NotImplementedException();
+            return parkingLot.Fetch(ticket);
         }
 
         public string Park(string car)
