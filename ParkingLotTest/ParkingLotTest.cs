@@ -28,7 +28,7 @@ namespace ParkingLotTest
             ParkingLot parkingLot = new ParkingLot();
             string ticket = parkingLot.Park("car");
             //when
-            string car = parkingLot.fetch(ticket);
+            string car = parkingLot.Fetch(ticket);
             //then
             Assert.Equal("car", car);
         }
