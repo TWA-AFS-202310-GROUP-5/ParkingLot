@@ -16,7 +16,9 @@ namespace ParkingLotManage
                 return null;
             }
 
-            return ticket2Car[ticket];
+            string car = ticket2Car[ticket];
+            ticket2Car.Remove(ticket);
+            return car;
         }
 
         public string Park(string car)
