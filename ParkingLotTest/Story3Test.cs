@@ -13,7 +13,7 @@
         {
             ParkingLot parkingLot = new ParkingLot();
             List<ParkingLot> parkingLots = new List<ParkingLot> { parkingLot };
-            ParkingBoy standardParkingBoy = new ParkingBoy(parkingLots);
+            StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
             string car = "parkthiscar";
 
             string ticket = standardParkingBoy.Park(car);
@@ -26,7 +26,7 @@
         {
             ParkingLot parkingLot = new ParkingLot();
             List<ParkingLot> parkingLots = new List<ParkingLot> { parkingLot };
-            ParkingBoy standardParkingBoy = new ParkingBoy(parkingLots);
+            StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
             string car = "parkedCar";
             string ticket = parkingLot.Park(car);
 
@@ -40,7 +40,7 @@
         {
             ParkingLot parkingLot = new ParkingLot();
             List<ParkingLot> parkingLots = new List<ParkingLot> { parkingLot };
-            ParkingBoy standardParkingBoy = new ParkingBoy(parkingLots);
+            StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
             string car1 = "parkedCar1";
             string car2 = "parkedCar2";
             string ticket1 = parkingLot.Park(car1);
@@ -58,7 +58,7 @@
         {
             ParkingLot parkingLot = new ParkingLot();
             List<ParkingLot> parkingLots = new List<ParkingLot> { parkingLot };
-            ParkingBoy standardParkingBoy = new ParkingBoy(parkingLots);
+            StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
             string unrecognizedTicket = "errorT";
 
             WrongTicketException wrongTicketException = Assert.Throws<WrongTicketException>(() => standardParkingBoy.Fetch(unrecognizedTicket));
@@ -70,7 +70,7 @@
         {
             ParkingLot parkingLot = new ParkingLot();
             List<ParkingLot> parkingLots = new List<ParkingLot> { parkingLot };
-            ParkingBoy standardParkingBoy = new ParkingBoy(parkingLots);
+            StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
             string car = "Car";
             string carTicket = parkingLot.Park(car);
             string fetchCar = parkingLot.Fetch(carTicket);
@@ -85,7 +85,7 @@
         {
             ParkingLot parkingLot = new ParkingLot();
             List<ParkingLot> parkingLots = new List<ParkingLot> { parkingLot };
-            ParkingBoy standardParkingBoy = new ParkingBoy(parkingLots);
+            StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
             int numOfCars = 10;
             List<string> cars = Enumerable.Range(1, numOfCars)
                 .Select(i => i.ToString())

@@ -6,17 +6,17 @@
     using System.Net.Sockets;
     using ParkingLot;
 
-    public class ParkingBoy
+    public class StandardParkingBoy
     {
         private List<ParkingLot> parkingLots = new List<ParkingLot>();
         private string car;
 
-        public ParkingBoy(List<ParkingLot> parkingLots)
+        public StandardParkingBoy(List<ParkingLot> parkingLots)
         {
             this.parkingLots = parkingLots;
         }
 
-        public string Park(string car)
+        public virtual string Park(string car)
         {
             for (int i = 0; i < parkingLots.Count; i++)
             {

@@ -19,6 +19,7 @@
 
         public int NumOfParkedCars { get => ticket2carParking.Count; }
         public int Capacity { get => capacity; }
+        public int NumOfEmptyPosition { get => Capacity - NumOfParkedCars; }
 
         public Dictionary<string, string> Ticket2carParking
         {
@@ -27,7 +28,7 @@
 
         public string Park(string car)
         {
-            if (NumOfParkedCars < capacity)
+            if (NumOfEmptyPosition > 0)
             {
                 string ticket = "T-" + car;
                 ticket2carParking.Add(ticket, car);
