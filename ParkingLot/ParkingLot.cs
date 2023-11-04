@@ -11,6 +11,11 @@ namespace ParkingLotManage
         private Dictionary<string, string> ticket2Car = new Dictionary<string, string>();
         public string Fetch(string ticket)
         {
+            if (!ticket2Car.ContainsKey(ticket))
+            {
+                return null;
+            }
+
             return ticket2Car[ticket];
         }
 

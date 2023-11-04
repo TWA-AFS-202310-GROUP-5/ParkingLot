@@ -57,7 +57,7 @@ namespace ParkingLotTest
             //when
             string car = parkingLot.Fetch(ticket);
             //then
-            Assert.Equal("car3", car);
+            Assert.Null(car);
         }
     }
 }
