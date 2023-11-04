@@ -103,16 +103,18 @@ namespace ParkingLotTest
         /*
          * standard parking lot boy manage multi parking lots
          */
-        //[Fact]
-        //public void Should_car_be_parked_to_first_parking_lot_when_park_the_car_given_a_standard_parking_boy_manage_two_parking_lots_both_with_available_position_and_a_car()
-        //{
-        //    //given
-        //    ParkingLot parkingLot1 = new ParkingLot(1);
-        //    ParkingLot parkingLot2 = new ParkingLot(1);
-        //    StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(new ParkingLot[] { parkingLot1, parkingLot2});
-        //    string car = "car";
-        //    //when
-        //    Ticket ticket = standardParkinglotBoy.Park(car);
-        //}
+        [Fact]
+        public void Should_car_be_parked_to_first_parking_lot_when_park_the_car_given_a_standard_parking_boy_manage_two_parking_lots_both_with_available_position_and_a_car()
+        {
+            //given
+            ParkingLot parkingLot1 = new ParkingLot(1);
+            ParkingLot parkingLot2 = new ParkingLot(1);
+            StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(new ParkingLot[] { parkingLot1, parkingLot2 });
+            Car car = new Car();
+            //when
+            Ticket ticket = standardParkinglotBoy.Park(car);
+            //then
+            Assert.Equal(parkingLot1.ParkingLotId, ticket.ParkingLotId);
+        }
     }
 }
