@@ -59,5 +59,18 @@ namespace ParkingLotTest
             //then
             Assert.Null(car);
         }
+
+        [Fact]
+        public void Should_return_nothing_when_fetch_the_car_given_a_parking_lot_and_a_used_parking_ticket()
+        {
+            //given
+            ParkingLot parkingLot = new ParkingLot();
+            string ticket = parkingLot.Park("car");
+            parkingLot.Fetch(ticket);
+            //when
+            string car = parkingLot.Fetch(ticket);
+            //then
+            Assert.Null(car);
+        }
     }
 }
