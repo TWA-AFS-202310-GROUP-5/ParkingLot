@@ -10,11 +10,24 @@
         private string car;
 
         private Dictionary<string, string> ticket2carParking = new Dictionary<string, string>();
+
         private Dictionary<string, string> ticket2carFetched = new Dictionary<string, string>();
+
+        public ParkingLot()
+        {
+        }
+
+        public int NumOfParkedCars { get => ticket2carParking.Count; }
+        public int Capacity { get => capacity; }
+
+        public Dictionary<string, string> Ticket2carParking
+        {
+            get => ticket2carParking;
+        }
 
         public string Park(string car)
         {
-            if (ticket2carParking.Count < capacity)
+            if (NumOfParkedCars < capacity)
             {
                 string ticket = "T-" + car;
                 ticket2carParking.Add(ticket, car);

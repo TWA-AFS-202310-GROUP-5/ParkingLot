@@ -12,7 +12,8 @@
         public void Should_return_a_ticket_when_park_a_car()
         {
             ParkingLot parkingLot = new ParkingLot();
-            ParkingBoy standardParkingBoy = new ParkingBoy(parkingLot);
+            List<ParkingLot> parkingLots = new List<ParkingLot> { parkingLot };
+            ParkingBoy standardParkingBoy = new ParkingBoy(parkingLots);
             string car = "parkthiscar";
 
             string ticket = standardParkingBoy.Park(car);
@@ -24,7 +25,8 @@
         public void Should_return_parked_car_when_fetch_car_given_parked_car_ticket()
         {
             ParkingLot parkingLot = new ParkingLot();
-            ParkingBoy standardParkingBoy = new ParkingBoy(parkingLot);
+            List<ParkingLot> parkingLots = new List<ParkingLot> { parkingLot };
+            ParkingBoy standardParkingBoy = new ParkingBoy(parkingLots);
             string car = "parkedCar";
             string ticket = parkingLot.Park(car);
 
@@ -37,7 +39,8 @@
         public void Should_return_right_car_when_fecth_twice_given_two_parked_cars_tickets()
         {
             ParkingLot parkingLot = new ParkingLot();
-            ParkingBoy standardParkingBoy = new ParkingBoy(parkingLot);
+            List<ParkingLot> parkingLots = new List<ParkingLot> { parkingLot };
+            ParkingBoy standardParkingBoy = new ParkingBoy(parkingLots);
             string car1 = "parkedCar1";
             string car2 = "parkedCar2";
             string ticket1 = parkingLot.Park(car1);
@@ -54,7 +57,8 @@
         public void Should_return_nothing_with_error_msg_when_fetch_car_given_unrecognized_ticket()
         {
             ParkingLot parkingLot = new ParkingLot();
-            ParkingBoy standardParkingBoy = new ParkingBoy(parkingLot);
+            List<ParkingLot> parkingLots = new List<ParkingLot> { parkingLot };
+            ParkingBoy standardParkingBoy = new ParkingBoy(parkingLots);
             string unrecognizedTicket = "errorT";
 
             WrongTicketException wrongTicketException = Assert.Throws<WrongTicketException>(() => standardParkingBoy.Fetch(unrecognizedTicket));
@@ -65,7 +69,8 @@
         public void Should_return_nothing_with_error_msg_when_fetch_car_given_used_ticket()
         {
             ParkingLot parkingLot = new ParkingLot();
-            ParkingBoy standardParkingBoy = new ParkingBoy(parkingLot);
+            List<ParkingLot> parkingLots = new List<ParkingLot> { parkingLot };
+            ParkingBoy standardParkingBoy = new ParkingBoy(parkingLots);
             string car = "Car";
             string carTicket = parkingLot.Park(car);
             string fetchCar = parkingLot.Fetch(carTicket);
@@ -79,7 +84,8 @@
         public void Should_return_nothing_with_error_msg_when_park_car_with_no_position()
         {
             ParkingLot parkingLot = new ParkingLot();
-            ParkingBoy standardParkingBoy = new ParkingBoy(parkingLot);
+            List<ParkingLot> parkingLots = new List<ParkingLot> { parkingLot };
+            ParkingBoy standardParkingBoy = new ParkingBoy(parkingLots);
             int numOfCars = 10;
             List<string> cars = Enumerable.Range(1, numOfCars)
                 .Select(i => i.ToString())

@@ -3,26 +3,43 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Sockets;
     using ParkingLot;
 
     public class ParkingBoy
     {
-        private ParkingLot parkingLot;
+        private List<ParkingLot> parkingLots = new List<ParkingLot>();
         private string car;
 
-        public ParkingBoy(ParkingLot parkingLot)
+        public ParkingBoy(List<ParkingLot> parkingLots)
         {
-            this.parkingLot = parkingLot;
+            this.parkingLots = parkingLots;
         }
 
         public string Park(string car)
         {
-            return parkingLot.Park(car);
+            for (int i = 0; i < parkingLots.Count; i++)
+            {
+                if (parkingLots[i].NumOfParkedCars < parkingLots[i].Capacity)
+                {
+                    string parkingTicket = parkingLots[i].Park(car);
+                    return parkingTicket;
+                }
+            }
+
+            return parkingLots[0].Park(car);
+        }
+
+        public int ReturnIndexOfCarParkedLotOrZero(string parkingTicket)
+        {
+            int indexOfParkingLot = parkingLots.FindIndex(parkinglot => parkinglot.Ticket2carParking.ContainsKey(parkingTicket));
+            return indexOfParkingLot != -1 ? indexOfParkingLot : 0;
         }
 
         public string Fetch(string ticket)
         {
-            return parkingLot.Fetch(ticket);
+            int indexOfParkingLot = ReturnIndexOfCarParkedLotOrZero(ticket);
+            return parkingLots[indexOfParkingLot].Fetch(ticket);
         }
     }
 }
