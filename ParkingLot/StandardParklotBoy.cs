@@ -14,6 +14,11 @@ namespace ParkingLotManage
             this.parkingLot = parkingLot;
         }
 
+        public string Fetch(string ticket)
+        {
+            throw new NotImplementedException();
+        }
+
         public string Park(string car)
         {
             return parkingLot.Park(car);
