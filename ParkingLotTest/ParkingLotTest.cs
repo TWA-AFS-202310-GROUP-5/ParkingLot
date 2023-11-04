@@ -32,5 +32,20 @@ namespace ParkingLotTest
             //then
             Assert.Equal("car", car);
         }
+
+        [Fact]
+        public void Should_return_the_right_car_with_each_ticket_when_fetch_the_car_twice_given_a_parking_lot_with_two_parked_cars_and_two_parking_tickets()
+        {
+            // given
+            ParkingLot parkingLot = new ParkingLot();
+            string ticket1 = parkingLot.Park("car1");
+            string ticket2 = parkingLot.Park("car2");
+            //when
+            string car1 = parkingLot.Fetch(ticket1);
+            string car2 = parkingLot.Fetch(ticket2);
+            //then
+            Assert.Equal("car1", car1);
+            Assert.Equal("car2", car2);
+        }
     }
 }
