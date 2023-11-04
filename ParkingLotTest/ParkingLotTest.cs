@@ -74,18 +74,12 @@ namespace ParkingLotTest
         public void Should_throw_exception_when_park_given_parking_is_full()
         {
             var parkingLot = new Parking();
-            var ticket1 = parkingLot.Park("car1");
-            var ticket2 = parkingLot.Park("car2");
-            var ticket3 = parkingLot.Park("car3");
-            var ticket4 = parkingLot.Park("car4");
-            var ticket5 = parkingLot.Park("car5");
-            var ticket6 = parkingLot.Park("car6");
-            var ticket7 = parkingLot.Park("car7");
-            var ticket8 = parkingLot.Park("car8");
-            var ticket9 = parkingLot.Park("car9");
-            var ticket10 = parkingLot.Park("car10");
+            for (int i = 0; i < 20; i++)
+            {
+                parkingLot.Park($"car{i}");
+            }
 
-            var result = Assert.Throws<NoAvailablePositionException>(() => parkingLot.Park("car11"));
+            var result = Assert.Throws<NoAvailablePositionException>(() => parkingLot.Park("car No available position"));
             Assert.Equal("No available position", result.Message);
         }
     }

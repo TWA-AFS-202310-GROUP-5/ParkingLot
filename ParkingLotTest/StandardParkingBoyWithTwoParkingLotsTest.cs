@@ -8,36 +8,43 @@ using Xunit;
 
 namespace ParkingLotTest
 {
-    public class ParkingBoyTest
+    public class StandardParkingBoyWithTwoParkingLotsTest
     {
         [Fact]
-        public void Should_return_car_when_fetch_given_ticket()
+        public void Should_return_right_position_when_park_given_car()
         {
             var car = "car";
 
             var parkingBoy = new ParkingBoy();
             var ticket = parkingBoy.Park(car);
-            var result = parkingBoy.Fetch(ticket);
 
-            Assert.Equal(car, result);
+            Assert.Equal("ParkingLot1-" + car, ticket);
         }
 
         [Fact]
-        public void should_return_parked_car_when_fetch_given_ticket()
+        public void should_return_right_position_when_park_given_first_parking_is_full()
         {
             var parkingBoy = new ParkingBoy();
-            var ticket1 = parkingBoy.Park("car1");
 
-            var car1 = parkingBoy.Fetch(ticket1);
+            for (int i = 0; i < 10; i++)
+            {
+                parkingBoy.Park($"car{i}");
+            }
+            var ticket = parkingBoy.Park("car");
 
-            Assert.Equal("car1", car1);
+
+            Assert.Equal("ParkingLot2-car", ticket);
         }
 
         [Fact]
-        public void should_return_two_parked_car_when_fetch_given_two_ticket()
+        public void should_return_two_parked_car_when_fetch_given_two_ticket_in_different_parking_lot()
         {
             var parkingBoy = new ParkingBoy();
             var ticket1 = parkingBoy.Park("car1");
+            for (int i = 0; i < 10; i++)
+            {
+                parkingBoy.Park($"*car{i}");
+            }
             var ticket2 = parkingBoy.Park("car2");
 
             var car1 = parkingBoy.Fetch(ticket1);

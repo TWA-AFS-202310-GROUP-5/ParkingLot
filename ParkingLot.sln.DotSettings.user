@@ -3,5 +3,6 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.ParkingTest.Should_throw_exception_when_park_given_parking_is_full&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.ParkingBoyTest.Should_return_car_when_fetch_given_ticket&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.StandardParkingBoyWithTwoParkingLotsTest.Should_throw_exception_when_park_given_parking_is_full&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
