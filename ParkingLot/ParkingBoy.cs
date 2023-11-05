@@ -4,36 +4,25 @@ using System.Linq;
 
 namespace ParkingLot
 {
-    public class StandardParkingBoy
+    public class ParkingBoy
     {
         private Dictionary<Guid, ParkingLot> parkingLots = new Dictionary<Guid, ParkingLot>();
+        private IParkingStrategy parkingStrategy = new StandardParkingStrategy();
 
-        public StandardParkingBoy(ParkingLot parkingLot)
-        {
-            parkingLots.Add(parkingLot.Id, parkingLot);
-        }
-
-        public StandardParkingBoy(ParkingLot[] parkingLots)
+        public ParkingBoy(params ParkingLot[] parkingLots)
         {
             parkingLots.ToList().ForEach(parkingLot => this.parkingLots.Add(parkingLot.Id, parkingLot));
         }
 
-        protected Dictionary<Guid, ParkingLot> ParkingLots => parkingLots;
+        public ParkingBoy(IParkingStrategy parkingStrategy, params ParkingLot[] parkingLots)
+        {
+            parkingLots.ToList().ForEach(parkingLot => this.parkingLots.Add(parkingLot.Id, parkingLot));
+            this.parkingStrategy = parkingStrategy;
+        }
 
         public virtual Ticket Park(Car car)
         {
-            try
-            {
-                return parkingLots
-                    .Values
-                    .Where(parkingLot => parkingLot.EmptyLotNum > 0)
-                    .First()
-                    .Park(car);
-            }
-            catch (Exception)
-            {
-                throw new FullLotException();
-            }
+            return parkingStrategy.Park(car, parkingLots);
         }
 
         public virtual Car Fetch(Ticket ticket)

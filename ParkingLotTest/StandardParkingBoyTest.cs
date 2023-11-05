@@ -12,7 +12,7 @@ namespace ParkingLotTest
             //Given
             int capacity = 10;
             ParkingLot parkinglot = new ParkingLot(capacity);
-            StandardParkingBoy parkingBoy = new StandardParkingBoy(parkinglot);
+            ParkingBoy parkingBoy = new ParkingBoy(parkinglot);
             Car car = new Car();
 
             //When
@@ -28,7 +28,7 @@ namespace ParkingLotTest
             //Given
             int capacity = 10;
             ParkingLot parkinglot = new ParkingLot(capacity);
-            StandardParkingBoy parkingBoy = new StandardParkingBoy(parkinglot);
+            ParkingBoy parkingBoy = new ParkingBoy(parkinglot);
             Car car = new Car();
             var ticket = parkingBoy.Park(car);
 
@@ -45,7 +45,7 @@ namespace ParkingLotTest
             //Given
             int capacity = 10;
             ParkingLot parkinglot = new ParkingLot(capacity);
-            StandardParkingBoy parkingBoy = new StandardParkingBoy(parkinglot);
+            ParkingBoy parkingBoy = new ParkingBoy(parkinglot);
             Car car1 = new Car();
             Car car2 = new Car();
             var ticket1 = parkingBoy.Park(car1);
@@ -67,7 +67,7 @@ namespace ParkingLotTest
             int capacity = 10;
             string expectedErrorMessage = "Unrecognized parking ticket.";
             ParkingLot parkinglot = new ParkingLot(capacity);
-            StandardParkingBoy parkingBoy = new StandardParkingBoy(parkinglot);
+            ParkingBoy parkingBoy = new ParkingBoy(parkinglot);
             Car car = new Car();
             var ticket = parkingBoy.Park(car);
             var invalidTicket = new Ticket();
@@ -86,7 +86,7 @@ namespace ParkingLotTest
             int capacity = 10;
             string expectedErrorMessage = "Unrecognized parking ticket.";
             ParkingLot parkinglot = new ParkingLot(capacity);
-            StandardParkingBoy parkingBoy = new StandardParkingBoy(parkinglot);
+            ParkingBoy parkingBoy = new ParkingBoy(parkinglot);
             Car car = new Car();
             var ticket = parkingBoy.Park(car);
             parkingBoy.Fetch(ticket);
@@ -105,7 +105,7 @@ namespace ParkingLotTest
             int capacity = 1;
             string expectedErrorMessage = "No available position.";
             ParkingLot parkinglot = new ParkingLot(capacity);
-            StandardParkingBoy parkingBoy = new StandardParkingBoy(parkinglot);
+            ParkingBoy parkingBoy = new ParkingBoy(parkinglot);
             Car car1 = new Car();
             Car car2 = new Car();
             parkingBoy.Park(car1);
@@ -125,7 +125,7 @@ namespace ParkingLotTest
             int capacity = 1;
             ParkingLot parkinglot1 = new ParkingLot(capacity);
             ParkingLot parkinglot2 = new ParkingLot(capacity);
-            StandardParkingBoy parkingBoy = new StandardParkingBoy(new ParkingLot[] { parkinglot1, parkinglot2 });
+            ParkingBoy parkingBoy = new ParkingBoy(parkinglot1, parkinglot2);
             Car car = new Car();
 
             //When
@@ -142,7 +142,7 @@ namespace ParkingLotTest
             int capacity = 1;
             ParkingLot parkinglot1 = new ParkingLot(capacity);
             ParkingLot parkinglot2 = new ParkingLot(capacity);
-            StandardParkingBoy parkingBoy = new StandardParkingBoy(new ParkingLot[] { parkinglot1, parkinglot2 });
+            ParkingBoy parkingBoy = new ParkingBoy(parkinglot1, parkinglot2);
             Car car1 = new Car();
             Car car2 = new Car();
             var ticket1 = parkingBoy.Park(car1);
@@ -161,7 +161,7 @@ namespace ParkingLotTest
             int capacity = 1;
             ParkingLot parkinglot1 = new ParkingLot(capacity);
             ParkingLot parkinglot2 = new ParkingLot(capacity);
-            StandardParkingBoy parkingBoy = new StandardParkingBoy(new ParkingLot[] { parkinglot1, parkinglot2 });
+            ParkingBoy parkingBoy = new ParkingBoy(parkinglot1, parkinglot2);
             Car car1 = new Car();
             Car car2 = new Car();
             var ticket1 = parkingBoy.Park(car1);
@@ -184,7 +184,7 @@ namespace ParkingLotTest
             string expectedErrorMessage = "Unrecognized parking ticket.";
             ParkingLot parkinglot1 = new ParkingLot(capacity);
             ParkingLot parkinglot2 = new ParkingLot(capacity);
-            StandardParkingBoy parkingBoy = new StandardParkingBoy(new ParkingLot[] { parkinglot1, parkinglot2 });
+            ParkingBoy parkingBoy = new ParkingBoy(parkinglot1, parkinglot2);
             Car car1 = new Car();
             Car car2 = new Car();
             var ticket1 = parkingBoy.Park(car1);
@@ -206,7 +206,7 @@ namespace ParkingLotTest
             string expectedErrorMessage = "Unrecognized parking ticket.";
             ParkingLot parkinglot1 = new ParkingLot(capacity);
             ParkingLot parkinglot2 = new ParkingLot(capacity);
-            StandardParkingBoy parkingBoy = new StandardParkingBoy(new ParkingLot[] { parkinglot1, parkinglot2 });
+            ParkingBoy parkingBoy = new ParkingBoy(parkinglot1, parkinglot2);
             Car car1 = new Car();
             Car car2 = new Car();
             var ticket1 = parkingBoy.Park(car1);
@@ -228,7 +228,7 @@ namespace ParkingLotTest
             string expectedErrorMessage = "No available position.";
             ParkingLot parkinglot1 = new ParkingLot(capacity);
             ParkingLot parkinglot2 = new ParkingLot(capacity);
-            StandardParkingBoy parkingBoy = new StandardParkingBoy(new ParkingLot[] { parkinglot1, parkinglot2 });
+            ParkingBoy parkingBoy = new ParkingBoy(parkinglot1, parkinglot2);
             Car car1 = new Car();
             Car car2 = new Car();
             Car car3 = new Car();

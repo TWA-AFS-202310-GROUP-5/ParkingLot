@@ -4,21 +4,13 @@ using System.Linq;
 
 namespace ParkingLot
 {
-    public class SmartParkingBoy : StandardParkingBoy
+    public class SmartParkingStrategy : IParkingStrategy
     {
-        public SmartParkingBoy(ParkingLot parkingLot) : base(parkingLot)
-        {
-        }
-
-        public SmartParkingBoy(ParkingLot[] parkingLots) : base(parkingLots)
-        {
-        }
-
-        public override Ticket Park(Car car)
+        public Ticket Park(Car car, Dictionary<Guid, ParkingLot> parkingLots)
         {
             try
             {
-                return ParkingLots
+                return parkingLots
                     .Values
                     .OrderByDescending(parkingLot => parkingLot.EmptyLotNum)
                     .First()
