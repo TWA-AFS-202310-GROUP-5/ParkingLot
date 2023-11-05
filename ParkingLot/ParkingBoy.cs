@@ -20,12 +20,12 @@ namespace ParkingLot
             this.parkingStrategy = parkingStrategy;
         }
 
-        public virtual Ticket Park(Car car)
+        public Ticket Park(Car car)
         {
             return parkingStrategy.Park(car, parkingLots);
         }
 
-        public virtual Car Fetch(Ticket ticket)
+        public Car Fetch(Ticket ticket)
         {
             try
             {
