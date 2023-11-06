@@ -36,7 +36,7 @@ namespace ParkingLotTest
             var result = parkingBoy.Fetch(ticket);
 
             //Then
-            Assert.True(car == result);
+            Assert.Equal(car, result);
         }
 
         [Fact]
@@ -56,8 +56,8 @@ namespace ParkingLotTest
             var result2 = parkingBoy.Fetch(ticket2);
 
             //Then
-            Assert.True(car1 == result1);
-            Assert.True(car2 == result2);
+            Assert.Equal(car1, result1);
+            Assert.Equal(car2, result2);
         }
 
         [Fact]
@@ -68,8 +68,6 @@ namespace ParkingLotTest
             string expectedErrorMessage = "Unrecognized parking ticket.";
             ParkingLot parkinglot = new ParkingLot(capacity);
             ParkingBoy parkingBoy = new ParkingBoy(parkinglot);
-            Car car = new Car();
-            var ticket = parkingBoy.Park(car);
             var invalidTicket = new Ticket();
 
             //When
@@ -172,8 +170,8 @@ namespace ParkingLotTest
             var result2 = parkingBoy.Fetch(ticket2);
 
             //Then
-            Assert.True(car1 == result1);
-            Assert.True(car2 == result2);
+            Assert.Equal(car1, result1);
+            Assert.Equal(car2, result2);
         }
 
         [Fact]

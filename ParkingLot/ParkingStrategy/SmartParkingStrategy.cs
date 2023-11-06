@@ -6,19 +6,18 @@ namespace ParkingLot
 {
     public class SmartParkingStrategy : IParkingStrategy
     {
-        public Ticket Park(Car car, Dictionary<Guid, ParkingLot> parkingLots)
+        public ParkingLot FindAvailableLot(Dictionary<Guid, ParkingLot> parkingLots)
         {
             try
             {
                 return parkingLots
-                    .Values
-                    .OrderByDescending(parkingLot => parkingLot.EmptyLotNum)
-                    .First()
-                    .Park(car);
+                .Values
+                .OrderByDescending(parkingLot => parkingLot.EmptyLotNum)
+                .First();
             }
             catch (Exception)
             {
-                throw new FullLotException();
+                return null;
             }
         }
     }

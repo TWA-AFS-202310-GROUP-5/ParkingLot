@@ -5,6 +5,6 @@ namespace ParkingLot
 {
     public interface IParkingStrategy
     {
-        public Ticket Park(Car car, Dictionary<Guid, ParkingLot> parkingLots);
+        public ParkingLot FindAvailableLot(Dictionary<Guid, ParkingLot> parkingLots);
     }
 }

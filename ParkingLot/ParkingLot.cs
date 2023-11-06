@@ -45,10 +45,5 @@
 
             return ticket;
         }
-
-        public bool HasCar(Ticket ticket)
-        {
-            return ticketCarMap.ContainsKey(ticket);
-        }
     }
 }

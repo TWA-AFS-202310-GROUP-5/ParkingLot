@@ -22,7 +22,8 @@ namespace ParkingLot
 
         public Ticket Park(Car car)
         {
-            return parkingStrategy.Park(car, parkingLots);
+            ParkingLot lot = parkingStrategy.FindAvailableLot(parkingLots) ?? throw new FullLotException();
+            return lot.Park(car);
         }
 
         public Car Fetch(Ticket ticket)
