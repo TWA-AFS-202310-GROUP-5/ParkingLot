@@ -23,11 +23,6 @@
             return parkingBoy.Park(car);
         }
 
-        public int ReturnIndexOfCarParkedLotOrDefaultZero(string parkingTicket)
-        {
-            return parkingBoy.ReturnIndexOfCarParkedLotOrDefaultZero(parkingTicket);
-        }
-
         public string Fetch(string ticket)
         {
             return parkingBoy.Fetch(ticket);

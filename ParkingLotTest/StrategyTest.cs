@@ -5,6 +5,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Xunit;
+    using System.Net.Sockets;
 
     public class StrategyTest
     {
@@ -30,12 +31,11 @@
             ParkingBoyStrategyContext standardContext = new ParkingBoyStrategyContext(standard);
 
             string car = "parkthiscar";
+            string ticket = standardContext.Park(car);
 
-            //when
-            int indexOfParkedlot = standardContext.ReturnIndexOfCarParkedLotOrDefaultZero(standardContext.Park(car));
+            string carFetch = parkingLots[0].Fetch(ticket);
 
-            //then
-            Assert.Equal(0, indexOfParkedlot);
+            Assert.Equal(car, carFetch);
         }
 
         [Fact] //3F2S
@@ -59,12 +59,11 @@
             ParkingBoyStrategyContext smartContext = new ParkingBoyStrategyContext(smart);
 
             string car = "parkthiscar";
+            string ticket = smartContext.Park(car);
 
-            //when
-            int indexOfParkedlot = smartContext.ReturnIndexOfCarParkedLotOrDefaultZero(smartContext.Park(car));
+            string carFetch = parkingLots[1].Fetch(ticket);
 
-            //then
-            Assert.Equal(1, indexOfParkedlot);
+            Assert.Equal(car, carFetch);
         }
 
         [Fact] //3F8S
@@ -87,12 +86,11 @@
             IParkingBoyStrategy standard = new StandardParkingBoyStrategy(parkingLots);
             ParkingBoyStrategyContext standardContext = new ParkingBoyStrategyContext(standard);
             string car = "parkthiscar";
+            string ticket = standardContext.Park(car);
 
-            //when
-            int indexOfParkedlot = standardContext.ReturnIndexOfCarParkedLotOrDefaultZero(standardContext.Park(car));
+            string carFetch = parkingLots[0].Fetch(ticket);
 
-            //then
-            Assert.Equal(0, indexOfParkedlot);
+            Assert.Equal(car, carFetch);
         }
 
         [Fact] //3F8S
@@ -116,12 +114,11 @@
             ParkingBoyStrategyContext smartContext = new ParkingBoyStrategyContext(smart);
 
             string car = "parkthiscar";
+            string ticket = smartContext.Park(car);
 
-            //when
-            int indexOfParkedlot = smartContext.ReturnIndexOfCarParkedLotOrDefaultZero(smartContext.Park(car));
+            string carFetch = parkingLots[0].Fetch(ticket);
 
-            //then
-            Assert.Equal(0, indexOfParkedlot);
+            Assert.Equal(car, carFetch);
         }
     }
 }

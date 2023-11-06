@@ -21,11 +21,6 @@ namespace ParkingLot
             return parkingBoyStrategy.Park(car);
         }
 
-        public int ReturnIndexOfCarParkedLotOrDefaultZero(string ticket)
-        {
-            return parkingBoyStrategy.ReturnIndexOfCarParkedLotOrDefaultZero(ticket);
-        }
-
         public string Fetch(string ticket)
         {
             return parkingBoyStrategy.Fetch(ticket);

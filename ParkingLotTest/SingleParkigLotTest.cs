@@ -5,7 +5,7 @@
     using System.Linq;
     using Xunit;
 
-    public class Story1Test
+    public class SingleParkigLotTest
     {
         [Fact] //Case1
         public void Should_return_a_ticket_when_park_a_car()

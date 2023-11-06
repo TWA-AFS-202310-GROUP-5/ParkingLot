@@ -22,16 +22,18 @@
                 .Park(car) ?? parkingLots[0].Park(car);
         }
 
-        public int ReturnIndexOfCarParkedLotOrDefaultZero(string parkingTicket)
-        {
-            int indexOfParkingLot = parkingLots.FindIndex(parkinglot => parkinglot.Ticket2carParking
-                .ContainsKey(parkingTicket));
-            return indexOfParkingLot != -1 ? indexOfParkingLot : 0;
-        }
-
         public string Fetch(string ticket)
         {
-            return parkingLots[ReturnIndexOfCarParkedLotOrDefaultZero(ticket)].Fetch(ticket);
+            int indexOfParkingLot = parkingLots.FindIndex(parkinglot => parkinglot.Ticket2carParking
+                .ContainsKey(ticket));
+            if (indexOfParkingLot != -1)
+            {
+                return parkingLots[indexOfParkingLot].Fetch(ticket);
+            }
+            else
+            {
+                return parkingLots[0].Fetch(ticket);
+            }
         }
     }
 }

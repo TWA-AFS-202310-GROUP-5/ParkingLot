@@ -6,7 +6,7 @@
     using System.Linq;
     using Xunit;
 
-    public class Story5Test
+    public class SmartParkingBoyTest
     {
         [Fact]
         public void Should_park_a_car_to_first_parkinglot_when_park_a_car_given_two_empty_parkinglots()
@@ -16,9 +16,9 @@
             string car = "parkthiscar";
 
             string ticket = smartParkingBoy.Park(car);
-            int indexOfParkedlot = smartParkingBoy.ReturnIndexOfCarParkedLotOrDefaultZero(ticket);
+            string carFetch = parkingLots[0].Fetch(ticket);
 
-            Assert.Equal(0, indexOfParkedlot);
+            Assert.Equal(car, carFetch);
         }
 
         [Fact]
@@ -33,9 +33,9 @@
             string car = "parkthiscar";
 
             string ticket = smartParkingBoy.Park(car);
-            int indexOfParkedlot = smartParkingBoy.ReturnIndexOfCarParkedLotOrDefaultZero(ticket);
+            string carFetch = parkingLots[1].Fetch(ticket);
 
-            Assert.Equal(1, indexOfParkedlot);
+            Assert.Equal(car, carFetch);
         }
 
         [Fact]
@@ -50,9 +50,9 @@
             string car = "parkthiscar";
 
             string ticket = smartParkingBoy.Park(car);
-            int indexOfParkedlot = smartParkingBoy.ReturnIndexOfCarParkedLotOrDefaultZero(ticket);
+            string carFetch = parkingLots[0].Fetch(ticket);
 
-            Assert.Equal(0, indexOfParkedlot);
+            Assert.Equal(car, carFetch);
         }
 
         [Fact]

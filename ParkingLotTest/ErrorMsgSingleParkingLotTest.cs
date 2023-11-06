@@ -5,7 +5,7 @@
     using System.Linq;
     using Xunit;
 
-    public class Story2Test
+    public class ErrorMsgSingleParkingLotTest
     {
         [Fact] //Case1
         public void Should_return_nothing_with_error_msg_when_fetch_car_given_unrecognized_ticket()
