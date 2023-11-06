@@ -24,13 +24,21 @@ namespace ParkingLot
             };
         }
 
-        public string Park(string car, bool isSmart=false)
+        public string Park(string car, bool isSmart=false, bool singleLot = true)
         {
             if (ticket2car[0].Count >= capacity && ticket2car[1].Count >= capacity)
             {
                 throw new NoAvailablePositionException("No available position");
             }
 
+            if (ticket2car[0].Count >= 10 && singleLot && !isSmart)
+            {
+                throw new NoAvailablePositionException("No available position");
+            }
+            {
+
+                
+            }
             string ticket;
             if (ticket2car[0].Count < 10 && !isSmart || ticket2car[0].Count <= ticket2car[1].Count)
             {

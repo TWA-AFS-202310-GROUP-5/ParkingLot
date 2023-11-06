@@ -74,7 +74,7 @@ namespace ParkingLotTest
         public void Should_throw_exception_when_park_given_parking_is_full()
         {
             var parkingLot = new Parking();
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 10; i++)
             {
                 parkingLot.Park($"car{i}");
             }

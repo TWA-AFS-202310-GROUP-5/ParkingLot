@@ -17,7 +17,7 @@ namespace ParkingLot
 
         public string Park(string car)
         {
-            return ParkingLot.Park(car,true);
+            return ParkingLot.Park(car,true, false);
         }
 
         public string Fetch(string car)
