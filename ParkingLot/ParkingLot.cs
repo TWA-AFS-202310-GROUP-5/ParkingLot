@@ -28,18 +28,19 @@ namespace ParkingLotManagement
 
         public string Fetch(Ticket ticket)
         {
-            if (ticket == null || !Ticket2Car.ContainsKey(ticket) || ticket.IsValid == false)
+            if (ticket == null || !Ticket2Car.ContainsKey(ticket))
             {
                 throw new WrongTicketExceptoion("Unrecognized parking ticket.");
             }
 
-            ticket.IsValid = false;
-            return Ticket2Car[ticket];
+            string returnedCar = Ticket2Car[ticket];
+            Ticket2Car.Remove(ticket);
+            return returnedCar;
         }
 
         public Ticket Park(string carName)
         {
-            if (GetEmptyPosition() != 0)
+            if (CountEmptySpots() != 0)
             {
                 Ticket ticket = new Ticket(carName, Name);
                 Ticket2Car[ticket] = carName;
@@ -51,7 +52,7 @@ namespace ParkingLotManagement
             }
         }
 
-        public int GetEmptyPosition()
+        public int CountEmptySpots()
         {
             return Capacity - Ticket2Car.Count;
         }

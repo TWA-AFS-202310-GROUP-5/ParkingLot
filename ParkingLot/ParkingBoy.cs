@@ -8,7 +8,7 @@ namespace ParkingLotManagement
 {
     public class ParkingBoy
     {
-        private IStrategy strategy;
+        private IParkingStrategy strategy;
         private List<ParkingLot> parkingLots;
 
         public ParkingBoy()
@@ -21,7 +21,7 @@ namespace ParkingLotManagement
             ParkingLots = p;
         }
 
-        public ParkingBoy(IStrategy strategy)
+        public ParkingBoy(IParkingStrategy strategy)
         {
             this.strategy = strategy;
         }
@@ -32,7 +32,7 @@ namespace ParkingLotManagement
             set => parkingLots = value;
         }
 
-        public void SetStrategy(IStrategy strategy)
+        public void SetStrategy(IParkingStrategy strategy)
         {
             this.strategy = strategy;
         }
@@ -55,19 +55,20 @@ namespace ParkingLotManagement
 
         public string Fetch(Ticket ticket)
         {
-            foreach (var parkingLot in ParkingLots)
+            if (ticket == null)
             {
-                try
-                {
-                    return parkingLot.Fetch(ticket);
-                }
-                catch
-                {
-                    continue;
-                }
+                throw new WrongTicketExceptoion("Unrecognized parking ticket.");
             }
 
-            throw new WrongTicketExceptoion("Unrecognized parking ticket.");
+            ParkingLot parkingLot = ParkingLots.FirstOrDefault(p => p.Ticket2Car.ContainsKey(ticket));
+            if (parkingLot == null)
+            {
+                throw new WrongTicketExceptoion("Unrecognized parking ticket.");
+            }
+            else
+            {
+                return parkingLot.Fetch(ticket);
+            }
         }
     }
 }

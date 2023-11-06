@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ParkingLotManagement
 {
-    public interface IStrategy
+    public interface IParkingStrategy
     {
         public ParkingLot GetFirstAvailableParkingLot(List<ParkingLot> parkingLots);
     }

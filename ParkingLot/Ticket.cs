@@ -10,23 +10,16 @@ namespace ParkingLotManagement
     {
         private string carName;
         private string parkingLot;
-        private bool isValid;
+
         public Ticket(string car, string name)
         {
             CarName = car;
-            isValid = true;
             parkingLot = name;
         }
 
         public string CarName
         {
             get { return carName; } set { carName = value; }
-        }
-
-        public bool IsValid
-        {
-            get { return isValid; }
-            set { isValid = value; }
         }
 
         public string ParkingLot { get => parkingLot; set => parkingLot = value; }
