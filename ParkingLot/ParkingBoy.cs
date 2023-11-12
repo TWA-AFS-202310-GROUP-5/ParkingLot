@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ParkingLotManage.searchLotStrategy;
 
 namespace ParkingLotManage
 {
-    public class StandardParklotBoy
+    public class ParkingBoy
     {
         protected List<ParkingLot> parkingLots = new List<ParkingLot>();
         protected ISearchStrategy _searchStrategy;
 
-        public StandardParklotBoy(ParkingLot parkingLot, ISearchStrategy searchStrategy)
+        public ParkingBoy(ParkingLot parkingLot, ISearchStrategy searchStrategy)
         {
             this.parkingLots.Add(parkingLot);
             this._searchStrategy = searchStrategy;
         }
 
-        public StandardParklotBoy(ParkingLot[] parkingLots, ISearchStrategy searchStrategy)
+        public ParkingBoy(ParkingLot[] parkingLots, ISearchStrategy searchStrategy)
         {
             this.parkingLots.AddRange(parkingLots);
             this._searchStrategy = searchStrategy;

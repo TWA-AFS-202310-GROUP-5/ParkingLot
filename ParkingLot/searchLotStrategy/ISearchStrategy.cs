@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ParkingLotManage
+namespace ParkingLotManage.searchLotStrategy
 {
     public interface ISearchStrategy
     {

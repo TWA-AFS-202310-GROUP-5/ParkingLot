@@ -1,4 +1,5 @@
 ﻿using ParkingLotManage;
+using ParkingLotManage.searchLotStrategy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace ParkingLotTest
         {
             // given
             ParkingLot parkingLot = new ParkingLot();
-            StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(parkingLot, new StandardSearchStrategy());
+            ParkingBoy standardParkinglotBoy = new ParkingBoy(parkingLot, new StandardSearchStrategy());
             Car car = new Car();
             //when
             Ticket ticket = standardParkinglotBoy.Park(car);
@@ -28,7 +29,7 @@ namespace ParkingLotTest
         {
             // given
             ParkingLot parkingLot = new ParkingLot();
-            StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(parkingLot, new StandardSearchStrategy());
+            ParkingBoy standardParkinglotBoy = new ParkingBoy(parkingLot, new StandardSearchStrategy());
             Car car = new Car();
             Ticket ticket = standardParkinglotBoy.Park(car);
             // when
@@ -42,7 +43,7 @@ namespace ParkingLotTest
         {
             // given
             ParkingLot parkingLot = new ParkingLot();
-            StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(parkingLot, new StandardSearchStrategy());
+            ParkingBoy standardParkinglotBoy = new ParkingBoy(parkingLot, new StandardSearchStrategy());
             Car car1 = new Car();
             Car car2 = new Car();
             Ticket ticket1 = standardParkinglotBoy.Park(car1);
@@ -60,7 +61,7 @@ namespace ParkingLotTest
         {
             //given
             ParkingLot parkingLot = new ParkingLot();
-            StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(parkingLot, new StandardSearchStrategy());
+            ParkingBoy standardParkinglotBoy = new ParkingBoy(parkingLot, new StandardSearchStrategy());
             Ticket ticket = new Ticket();
             string errMsg = "Unrecognized parking ticket.";
             //when
@@ -74,7 +75,7 @@ namespace ParkingLotTest
         {
             //given
             ParkingLot parkingLot = new ParkingLot();
-            StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(parkingLot, new StandardSearchStrategy());
+            ParkingBoy standardParkinglotBoy = new ParkingBoy(parkingLot, new StandardSearchStrategy());
             Car car = new Car();
             Ticket ticket = standardParkinglotBoy.Park(car);
             standardParkinglotBoy.Fetch(ticket);
@@ -90,7 +91,7 @@ namespace ParkingLotTest
         {
             //given
             ParkingLot parkingLot = new ParkingLot(2);
-            StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(parkingLot, new StandardSearchStrategy());
+            ParkingBoy standardParkinglotBoy = new ParkingBoy(parkingLot, new StandardSearchStrategy());
             standardParkinglotBoy.Park(new Car());
             standardParkinglotBoy.Park(new Car());
             string errMsg = "No available position.";
@@ -109,7 +110,7 @@ namespace ParkingLotTest
             //given
             ParkingLot parkingLot1 = new ParkingLot(1);
             ParkingLot parkingLot2 = new ParkingLot(1);
-            StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(new ParkingLot[] { parkingLot1, parkingLot2 }, new StandardSearchStrategy());
+            ParkingBoy standardParkinglotBoy = new ParkingBoy(new ParkingLot[] { parkingLot1, parkingLot2 }, new StandardSearchStrategy());
             Car car = new Car();
             //when
             Ticket ticket = standardParkinglotBoy.Park(car);
@@ -123,7 +124,7 @@ namespace ParkingLotTest
             //given
             ParkingLot parkingLot1 = new ParkingLot(1);
             ParkingLot parkingLot2 = new ParkingLot(1);
-            StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(new ParkingLot[] { parkingLot1, parkingLot2 }, new StandardSearchStrategy());
+            ParkingBoy standardParkinglotBoy = new ParkingBoy(new ParkingLot[] { parkingLot1, parkingLot2 }, new StandardSearchStrategy());
             Car car1 = new Car();
             Car car2 = new Car();
             Ticket ticket1 = standardParkinglotBoy.Park(car1);
@@ -142,7 +143,7 @@ namespace ParkingLotTest
             //given
             ParkingLot parkingLot1 = new ParkingLot(1);
             ParkingLot parkingLot2 = new ParkingLot(1);
-            StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(new ParkingLot[] { parkingLot1, parkingLot2 }, new StandardSearchStrategy());
+            ParkingBoy standardParkinglotBoy = new ParkingBoy(new ParkingLot[] { parkingLot1, parkingLot2 }, new StandardSearchStrategy());
             Car car1 = new Car();
             Car car2 = new Car();
             standardParkinglotBoy.Park(car1);
@@ -158,7 +159,7 @@ namespace ParkingLotTest
             //given
             ParkingLot parkingLot1 = new ParkingLot(1);
             ParkingLot parkingLot2 = new ParkingLot(1);
-            StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(new ParkingLot[] { parkingLot1, parkingLot2 }, new StandardSearchStrategy());
+            ParkingBoy standardParkinglotBoy = new ParkingBoy(new ParkingLot[] { parkingLot1, parkingLot2 }, new StandardSearchStrategy());
             Car car1 = new Car();
             standardParkinglotBoy.Park(car1);
             Ticket unrecognizedTicket = new Ticket();
@@ -175,7 +176,7 @@ namespace ParkingLotTest
             //given
             ParkingLot parkingLot1 = new ParkingLot(1);
             ParkingLot parkingLot2 = new ParkingLot(1);
-            StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(new ParkingLot[] { parkingLot1, parkingLot2 }, new StandardSearchStrategy());
+            ParkingBoy standardParkinglotBoy = new ParkingBoy(new ParkingLot[] { parkingLot1, parkingLot2 }, new StandardSearchStrategy());
             Car car1 = new Car();
             Ticket ticket = standardParkinglotBoy.Park(car1);
             standardParkinglotBoy.Fetch(ticket);
@@ -192,7 +193,7 @@ namespace ParkingLotTest
             //given
             ParkingLot parkingLot1 = new ParkingLot(1);
             ParkingLot parkingLot2 = new ParkingLot(2);
-            StandardParklotBoy standardParkinglotBoy = new StandardParklotBoy(new ParkingLot[] { parkingLot1, parkingLot2 }, new StandardSearchStrategy());
+            ParkingBoy standardParkinglotBoy = new ParkingBoy(new ParkingLot[] { parkingLot1, parkingLot2 }, new StandardSearchStrategy());
             standardParkinglotBoy.Park(new Car());
             standardParkinglotBoy.Park(new Car());
             standardParkinglotBoy.Park(new Car());

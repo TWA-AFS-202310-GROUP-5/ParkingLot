@@ -1,17 +1,16 @@
-﻿using ParkingLotManage;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ParkingLotManage
+namespace ParkingLotManage.searchLotStrategy
 {
-    public class StandardSearchStrategy : ISearchStrategy
+    public class SmartSearchStrategy : ISearchStrategy
     {
         public ParkingLot SearchParkingLot(List<ParkingLot> parkingLots)
         {
-            return parkingLots.Find(x => !x.IsFull);
+            return parkingLots.OrderByDescending(x => x.EmptyNum).First();
         }
     }
 }

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ParkingLotManage
+namespace ParkingLotManage.searchLotStrategy
 {
-    public class SmartSearchStrategy : ISearchStrategy
+    public class StandardSearchStrategy : ISearchStrategy
     {
         public ParkingLot SearchParkingLot(List<ParkingLot> parkingLots)
         {
-            return parkingLots.OrderByDescending(x => x.EmptyNum).First();
+            return parkingLots.Find(x => !x.IsFull);
         }
     }
 }
